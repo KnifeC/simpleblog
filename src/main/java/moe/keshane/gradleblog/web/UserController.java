@@ -23,6 +23,7 @@ public class UserController {
         if(user == null){
             modelMap.put("success_title","失败了");
             modelMap.put("success_content","我也不知道该说什么");
+            return "home";
 //            return "失败了";
         }
         modelMap.put("success_title","成功");
