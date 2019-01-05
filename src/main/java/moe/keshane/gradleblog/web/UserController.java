@@ -15,6 +15,7 @@ public class UserController {
     @Autowired
     private LoginService loginService;
     @RequestMapping(value = "login",method = RequestMethod.POST)
+//    @ResponseBody
     public String login(UserForm userForm,ModelMap modelMap)
     {
 //        ModelMap modelMap = new ModelMap();
@@ -22,24 +23,29 @@ public class UserController {
         if(user == null){
             modelMap.put("success_title","失败了");
             modelMap.put("success_content","我也不知道该说什么");
+//            return "失败了";
         }
         modelMap.put("success_title","成功");
         modelMap.put("success_content","我一句话不说也不好");
+//        return user.toString();
         return "home";
     }
 
     @Autowired
     private RegService regService;
     @RequestMapping(value = "reg",method = RequestMethod.POST)
+//    @ResponseBody
     public String reg(UserForm userForm,ModelMap modelMap){
 //        ModelMap modelMap = new ModelMap();
         boolean reg = regService.reg(userForm.getUsername(), userForm.getPassword());
         if(reg){
             modelMap.put("success_title","成功了");
             modelMap.put("success_content","看你这么热情");
+//            return userForm.toString();
         }else{
             modelMap.put("success_title","失败了");
             modelMap.put("success_content","搞个大新闻");
+//            return "失败了";
         }
         return "home";
     }
