@@ -9,9 +9,17 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int articleid;
+
     private Date pubdate;
     private String title;
     private String context;
+
+    public Article(Date pubdate, String title, String context) {
+        this.pubdate = pubdate;
+        this.title = title;
+        this.context = context;
+    }
+
 
     @Override
     public String toString() {

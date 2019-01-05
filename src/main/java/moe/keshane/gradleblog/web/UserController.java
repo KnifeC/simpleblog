@@ -6,34 +6,41 @@ import moe.keshane.gradleblog.service.interfaces.RegService;
 import moe.keshane.gradleblog.web.forms.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 public class UserController {
 
     @Autowired
     private LoginService loginService;
-    @PostMapping("/login")
-    @ResponseBody
-    public String login(UserForm userForm)
+    @RequestMapping(value = "login",method = RequestMethod.POST)
+    public String login(UserForm userForm,ModelMap modelMap)
     {
+//        ModelMap modelMap = new ModelMap();
         User user = loginService.login(userForm.getUsername(),userForm.getPassword());
         if(user == null){
-            return "登陆失败";
+            modelMap.put("success_title","失败了");
+            modelMap.put("success_content","我也不知道该说什么");
         }
-        return user.toString();
+        modelMap.put("success_title","成功");
+        modelMap.put("success_content","我一句话不说也不好");
+        return "home";
     }
 
     @Autowired
     private RegService regService;
-    @PostMapping("/reg")
-    @ResponseBody
-    public String reg(UserForm userForm){
+    @RequestMapping(value = "reg",method = RequestMethod.POST)
+    public String reg(UserForm userForm,ModelMap modelMap){
+//        ModelMap modelMap = new ModelMap();
         boolean reg = regService.reg(userForm.getUsername(), userForm.getPassword());
         if(reg){
-            return "注册成功"+userForm.toString();
+            modelMap.put("success_title","成功了");
+            modelMap.put("success_content","看你这么热情");
         }else{
-            return "注册失败"+userForm.toString();
+            modelMap.put("success_title","失败了");
+            modelMap.put("success_content","搞个大新闻");
         }
+        return "home";
     }
 }
