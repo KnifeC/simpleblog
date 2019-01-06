@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Article Here</title>
+</head>
+<body>
+<table>
+    <tr>
+        <th>title</th>
+        <th>postdatetime</th>
+        <th>context</th>
+        <th>hascomment</th>
+    </tr>
+    {{#articlelist}}
+    <!--{{.}}-->
+    <tr>
+        <td><a href="/article/{{articleid}}">{{title}}</a></td>
+        <td>{{postdate}}</td>
+        <td>{{context}}</td>
+        <td>{{hascomment}}</td>
+    </tr>
+    {{/articlelist}}
+</table>
+</body>
+</html>

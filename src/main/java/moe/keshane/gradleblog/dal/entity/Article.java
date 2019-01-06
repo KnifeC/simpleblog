@@ -10,7 +10,7 @@ public class Article {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int articleid;
 
-    private Date pubdate;
+    private Date postdate;
     private String title;
     private String context;
     private boolean hascomment = false;
@@ -19,34 +19,26 @@ public class Article {
     public String toString() {
         return "Article{" +
                 "articleid=" + articleid +
-                ", pubdate=" + pubdate +
+                ", postdate=" + postdate +
                 ", title='" + title + '\'' +
                 ", context='" + context + '\'' +
                 ", hascomment=" + hascomment +
                 '}';
     }
 
-    public Article(Date pubdate, String title, String context, boolean hascomment) {
-        this.pubdate = pubdate;
-        this.title = title;
-        this.context = context;
-        this.hascomment = hascomment;
-    }
-
-    public Article(Date pubdate, String title, String context) {
-        this.pubdate = pubdate;
-        this.title = title;
-        this.context = context;
-    }
-
     public Article() {
     }
 
-    public boolean isHascomment() {
-        return hascomment;
+    public Article(Date postdate, String title, String context) {
+        this.postdate = postdate;
+        this.title = title;
+        this.context = context;
     }
 
-    public void setHascomment(boolean hascomment) {
+    public Article(Date postdate, String title, String context, boolean hascomment) {
+        this.postdate = postdate;
+        this.title = title;
+        this.context = context;
         this.hascomment = hascomment;
     }
 
@@ -58,12 +50,12 @@ public class Article {
         this.articleid = articleid;
     }
 
-    public Date getPubdate() {
-        return pubdate;
+    public Date getPostdate() {
+        return postdate;
     }
 
-    public void setPubdate(Date pubdate) {
-        this.pubdate = pubdate;
+    public void setPostdate(Date postdate) {
+        this.postdate = postdate;
     }
 
     public String getTitle() {
@@ -80,5 +72,13 @@ public class Article {
 
     public void setContext(String context) {
         this.context = context;
+    }
+
+    public boolean isHascomment() {
+        return hascomment;
+    }
+
+    public void setHascomment(boolean hascomment) {
+        this.hascomment = hascomment;
     }
 }

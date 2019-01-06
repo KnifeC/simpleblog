@@ -9,26 +9,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class UserController {
 
     @Autowired
     private LoginService loginService;
     @RequestMapping(value = "login",method = RequestMethod.POST)
-//    @ResponseBody
-    public String login(UserForm userForm,ModelMap modelMap)
+    public String login(UserForm userForm, ModelMap modelMap, HttpSession session)
     {
-//        ModelMap modelMap = new ModelMap();
         User user = loginService.login(userForm.getUsername(),userForm.getPassword());
         if(user == null){
             modelMap.put("success_title","失败了");
             modelMap.put("success_content","无可奉告");
             return "home";
-//            return "失败了";
         }
+        session.setAttribute("user_id",user.getUserid());
         modelMap.put("success_title","成功");
         modelMap.put("success_content","我一句话不说也不好");
-//        return user.toString();
         return "home";
     }
 

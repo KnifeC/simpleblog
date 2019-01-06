@@ -1,6 +1,5 @@
 package moe.keshane.gradleblog.web.forms;
 
-import java.util.Date;
 
 public class ArticleForm {
 
@@ -8,20 +7,13 @@ public class ArticleForm {
     private String context;
     private boolean hascomment = false;
 
-    @Override
-    public String toString() {
-        return "ArticleForm{" +
-                "title='" + title + '\'' +
-                ", context='" + context + '\'' +
-                ", hascomment=" + hascomment +
-                '}';
+
+    public ArticleForm() {
     }
 
-    public boolean isHascomment() {
-        return hascomment;
-    }
-
-    public void setHascomment(boolean hascomment) {
+    public ArticleForm(String title, String context, boolean hascomment) {
+        this.title = title;
+        this.context = context;
         this.hascomment = hascomment;
     }
 
@@ -39,6 +31,14 @@ public class ArticleForm {
 
     public void setContext(String context) {
         this.context = context;
+    }
+
+    public boolean isHascomment() {
+        return hascomment;
+    }
+
+    public void setHascomment(boolean hascomment) {
+        this.hascomment = hascomment;
     }
 }
 
