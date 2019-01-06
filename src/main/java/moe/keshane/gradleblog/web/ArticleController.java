@@ -49,7 +49,7 @@ public class ArticleController {
 //    }
 
     @RequestMapping(value = "/article",method = RequestMethod.GET)
-    public String article(HttpServletRequest request){
+    public String article(){
         return "redirect:list" ;
     }
 //    @GetMapping

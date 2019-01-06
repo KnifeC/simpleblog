@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class IndexController {
 
-    @RequestMapping("index")
+    @RequestMapping("/")
     public String index(){
-        return "home";
+        return "forward:list";
     }
 
 }
