@@ -25,7 +25,7 @@ public class ArticleController {
 
     @PostMapping("/article")
     public String article(ArticleForm articleForm){
-        Article article = new Article(new Date(),articleForm.getTitle(),articleForm.getContext());
+        Article article = new Article(new Date(),articleForm.getTitle(),articleForm.getContext(),articleForm.isHascomment());
         Article post = postService.postArticle(article);
         if(post != null){
             new ModelMap().put("ispost","文章发布成功,id="+post.getArticleid());

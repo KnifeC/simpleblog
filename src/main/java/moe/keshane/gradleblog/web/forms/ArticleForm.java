@@ -6,7 +6,7 @@ public class ArticleForm {
 
     private String title;
     private String context;
-    private boolean hascomment;
+    private boolean hascomment = false;
 
     @Override
     public String toString() {
