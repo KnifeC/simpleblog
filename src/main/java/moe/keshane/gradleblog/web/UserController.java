@@ -35,18 +35,15 @@ public class UserController {
     @Autowired
     private RegService regService;
     @RequestMapping(value = "reg",method = RequestMethod.POST)
-//    @ResponseBody
     public String reg(UserForm userForm,ModelMap modelMap){
-//        ModelMap modelMap = new ModelMap();
-        boolean reg = regService.reg(userForm.getUsername(), userForm.getPassword());
-        if(reg){
+        User user = new User(userForm.getUsername(),userForm.getPassword());
+        User reg = regService.reg(user);
+        if(reg != null){
             modelMap.put("success_title","成功了");
             modelMap.put("success_content","看你这么热情");
-//            return userForm.toString();
         }else{
             modelMap.put("success_title","失败了");
             modelMap.put("success_content","搞个大新闻");
-//            return "失败了";
         }
         return "home";
     }

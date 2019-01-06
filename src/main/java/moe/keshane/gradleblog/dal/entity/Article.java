@@ -13,13 +13,7 @@ public class Article {
     private Date pubdate;
     private String title;
     private String context;
-
-    public Article(Date pubdate, String title, String context) {
-        this.pubdate = pubdate;
-        this.title = title;
-        this.context = context;
-    }
-
+    private boolean hascomment = false;
 
     @Override
     public String toString() {
@@ -28,7 +22,32 @@ public class Article {
                 ", pubdate=" + pubdate +
                 ", title='" + title + '\'' +
                 ", context='" + context + '\'' +
+                ", hascomment=" + hascomment +
                 '}';
+    }
+
+    public Article(Date pubdate, String title, String context, boolean hascomment) {
+        this.pubdate = pubdate;
+        this.title = title;
+        this.context = context;
+        this.hascomment = hascomment;
+    }
+
+    public Article(Date pubdate, String title, String context) {
+        this.pubdate = pubdate;
+        this.title = title;
+        this.context = context;
+    }
+
+    public Article() {
+    }
+
+    public boolean isHascomment() {
+        return hascomment;
+    }
+
+    public void setHascomment(boolean hascomment) {
+        this.hascomment = hascomment;
     }
 
     public int getArticleid() {

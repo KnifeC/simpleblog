@@ -12,13 +12,13 @@ public class PostServiceImpl implements PostService {
     ArticleRepo articleRepo;
 
     @Override
-    public int postArticle(Article article) {
+    public Article postArticle(Article article) {
         try{
             articleRepo.save(article);
-            return article.getArticleid();
+            return article;
         }catch (Exception e) {
             e.printStackTrace();
-            return -1;
+            return null;
         }
     }
 }

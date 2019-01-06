@@ -26,13 +26,13 @@ public class ArticleController {
     @PostMapping("/article")
     public String article(ArticleForm articleForm){
         Article article = new Article(new Date(),articleForm.getTitle(),articleForm.getContext());
-        int postid = postService.postArticle(article);
-        if(postid!=-1){
-            new ModelMap().put("ispost","文章发布成功,id="+postid);
-            return "没写界面";
+        Article post = postService.postArticle(article);
+        if(post != null){
+            new ModelMap().put("ispost","文章发布成功,id="+post.getArticleid());
+            return "文章发布成功,id="+post.getArticleid();
         }else{
             new ModelMap().put("ispost","文章发布失败");
-            return "没写界面";
+            return "文章发布失败";
         }
     }
 

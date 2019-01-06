@@ -13,16 +13,13 @@ public class RegServiceImpl implements RegService {
     UserRepo userRepo;
 
     @Override
-    public boolean reg(String username, String password) {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
+    public User reg(User user) {
         try {
             userRepo.save(user);
-            return true;
+            return user;
         }catch(Exception e){
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 }

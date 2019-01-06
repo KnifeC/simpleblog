@@ -1,6 +1,8 @@
 package moe.keshane.gradleblog.service.interfaces;
 
 
+import moe.keshane.gradleblog.dal.entity.User;
+
 public interface RegService {
-    boolean reg(String username,String password);
+    User reg(User user);
 }

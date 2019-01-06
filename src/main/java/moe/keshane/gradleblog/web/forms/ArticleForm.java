@@ -6,13 +6,23 @@ public class ArticleForm {
 
     private String title;
     private String context;
+    private boolean hascomment;
 
     @Override
     public String toString() {
         return "ArticleForm{" +
-                ", title='" + title + '\'' +
+                "title='" + title + '\'' +
                 ", context='" + context + '\'' +
+                ", hascomment=" + hascomment +
                 '}';
+    }
+
+    public boolean isHascomment() {
+        return hascomment;
+    }
+
+    public void setHascomment(boolean hascomment) {
+        this.hascomment = hascomment;
     }
 
     public String getTitle() {
