@@ -16,7 +16,7 @@ public class ListController {
 
     @Autowired
     ListService listService;
-    @RequestMapping(value = "list",method = RequestMethod.GET)
+    @RequestMapping(value = "/list",method = RequestMethod.GET)
     public String list(ModelMap modelMap){
         ArrayList<Article> articles = listService.listAllArticle();
         if(articles!=null) {

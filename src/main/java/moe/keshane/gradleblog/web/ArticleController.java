@@ -1,10 +1,7 @@
 package moe.keshane.gradleblog.web;
 
 import moe.keshane.gradleblog.dal.entity.Article;
-import moe.keshane.gradleblog.service.interfaces.EditService;
-import moe.keshane.gradleblog.service.interfaces.PostService;
-import moe.keshane.gradleblog.service.interfaces.ReadService;
-import moe.keshane.gradleblog.service.interfaces.SearchService;
+import moe.keshane.gradleblog.service.interfaces.*;
 import moe.keshane.gradleblog.web.forms.ArticleForm;
 import moe.keshane.gradleblog.web.forms.EditForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +23,8 @@ public class ArticleController {
     SearchService searchService;
     @Autowired
     EditService editService;
+    @Autowired
+    DeleteService deleteService;
 
     @RequestMapping(value = "/article",method = RequestMethod.POST)
     @ResponseBody
@@ -51,7 +50,7 @@ public class ArticleController {
     public String article(@PathVariable("id") Integer id,ModelMap modelMap){
         Article article = readService.readById(id);
         if(article == null){
-            return "请求的参数错误";
+            return "forward:errorpage";
         }
         modelMap.put("article",article);
         return "read";
@@ -61,7 +60,7 @@ public class ArticleController {
     public String edit(@PathVariable("id") Integer id,ModelMap modelMap){
         Article editArticle = editService.getEditArticle(id);
         if(editArticle==null){
-            return "forward:error";
+            return "forward:errorpage";
         }
         modelMap.put("edit_article",editArticle);
         return "editarticle";
@@ -77,7 +76,7 @@ public class ArticleController {
             saveArticle.setPostdate(dateTime);
         } catch (ParseException e) {
             e.printStackTrace();
-            return "XXXXX";
+            return "forward:errorpage";
         }
         saveArticle.setArticleid(editForm.getArticleid());
         saveArticle.setContext(editForm.getContext());
@@ -85,9 +84,17 @@ public class ArticleController {
         saveArticle.setHascomment(editForm.isHascomment());
         Article article = editService.saveEditArticle(saveArticle);
         if(article==null){
-            return "forward:error";
+            return "修改失败";
         }
         return "修改成功";
+    }
+
+    @RequestMapping(value = "/deletearticle/{id}",method = RequestMethod.GET)
+    public String deleteArticle(@PathVariable("id") Integer articleid){
+        boolean isDelete = deleteService.deleteArticleById(articleid);
+
+        return "redirect:/list";
+
     }
 
 }
