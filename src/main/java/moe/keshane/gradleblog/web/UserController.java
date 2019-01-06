@@ -22,7 +22,7 @@ public class UserController {
         User user = loginService.login(userForm.getUsername(),userForm.getPassword());
         if(user == null){
             modelMap.put("success_title","失败了");
-            modelMap.put("success_content","我也不知道该说什么");
+            modelMap.put("success_content","无可奉告");
             return "home";
 //            return "失败了";
         }
