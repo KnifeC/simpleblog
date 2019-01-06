@@ -38,32 +38,30 @@ public class ArticleController {
     }
 
 
+//    @RequestMapping(value = "/article",method = RequestMethod.GET)
+//    public String article(int id,ModelMap modelMap){
+//        Article article = readService.readById(id);
+//        if(article == null){
+//            return "请求的参数错误";
+//        }
+//        modelMap.put("article",article);
+//        return "read";
+//    }
+
+    @RequestMapping(value = "/article",method = RequestMethod.GET)
+    public String article(HttpServletRequest request){
+        return "redirect:list" ;
+    }
 //    @GetMapping
 //    public String article(@PathVariable("id") Integer id){
     @RequestMapping(value = "/article/{id}",method = RequestMethod.GET)
-    @ResponseBody
-    public String article(@PathVariable("id") Integer id){
+    public String article(@PathVariable("id") Integer id,ModelMap modelMap){
         Article article = readService.readById(id);
         if(article == null){
             return "请求的参数错误";
         }
-        return article.toString();
+        modelMap.put("article",article);
+        return "read";
     }
 
-    @RequestMapping(value = "/article",method = RequestMethod.GET)
-    @ResponseBody
-    public String article(int id){
-        Article article = readService.readById(id);
-        if(article == null){
-            return "请求的参数错误";
-        }
-        return article.toString();
-    }
-
-    @RequestMapping("/article")
-    @ResponseBody
-    public String article(HttpServletRequest request){
-
-        return "redirect:/list" ;
-    }
 }
