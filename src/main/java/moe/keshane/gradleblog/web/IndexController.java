@@ -11,11 +11,11 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index(){
-        return "forward:list";
+        return "forward:/list";
     }
 
     @RequestMapping("/index")
     public String index_1(){
-        return "forward:list";
+        return "forward:/list";
     }
 }
