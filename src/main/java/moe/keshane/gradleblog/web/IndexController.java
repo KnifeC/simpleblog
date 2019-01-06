@@ -14,4 +14,8 @@ public class IndexController {
         return "forward:list";
     }
 
+    @RequestMapping("/index")
+    public String index_1(){
+        return "forward:list";
+    }
 }
