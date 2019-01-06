@@ -22,10 +22,6 @@ sourceCompatibility = 1.8
 repositories {
     mavenCentral()
 }
-lombok {
-    version = '1.18.4'
-    sha256 = ""
-}
 
 dependencies {
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-mustache', version: '2.1.1.RELEASE'
