@@ -14,13 +14,24 @@ public class EditServiceImpl implements EditService {
     ArticleRepo articleRepo;
     @Override
     public Article getEditArticle(int articleid) {
-        Article articleNeedEdit = articleRepo.findOneByArticleid(articleid);
+        try {
+            Article articleNeedEdit = articleRepo.findOneByArticleid(articleid);
+            return  articleNeedEdit;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
 
-        return  articleNeedEdit;
     }
 
     @Override
     public Article saveEditArticle(Article article) {
-        return null;
+        try {
+            articleRepo.save(article);
+            return  article;
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }

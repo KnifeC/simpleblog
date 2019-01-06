@@ -11,14 +11,15 @@
         <th>postdatetime</th>
         <th>context</th>
         <th>hascomment</th>
+        <th></th>
     </tr>
     {{#articlelist}}
-    <!--{{.}}-->
     <tr>
         <td><a href="/article/{{articleid}}">{{title}}</a></td>
         <td>{{postdate}}</td>
         <td>{{context}}</td>
         <td>{{hascomment}}</td>
+        <td><a href="/edit/{{articleid}}">edit this</a></td>
     </tr>
     {{/articlelist}}
 </table>

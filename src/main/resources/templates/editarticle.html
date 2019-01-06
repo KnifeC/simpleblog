@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {{#edit_article}}
+    <title>edit article</title>
+</head>
+<body>
+<form method="post" action="/edit">
+    <input name="articleid" value="{{articleid}}" hidden/>
+    <input type="datetime" name="postdate" value="{{postdate}}" readonly/>
+    <input type="text" placeholder="title" name="title" value="{{title}}"/>
+    <textarea name="context">
+        {{context}}
+    </textarea>
+    <input type="checkbox" name="hascomment" value="{{hascomment}}"/>
+    <label>open comment?</label>
+    <button type="submit">edit</button>
+</form>
+{{/edit_article}}
+</body>
+</html>
