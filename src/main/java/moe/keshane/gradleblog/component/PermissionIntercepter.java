@@ -14,11 +14,15 @@ public class PermissionIntercepter implements HandlerInterceptor {
         HttpSession session = request.getSession();
         Object user_id = session.getAttribute(SessionKey.USER_ID);
         Object user_name = session.getAttribute(SessionKey.USER_NAME);
+        Object user_type = session.getAttribute(SessionKey.USER_TYPE);
         if(user_id == null || user_name == null){
             request.setAttribute("msg","请先登录");
             request.getRequestDispatcher("/login").forward(request,response);
             return false;
         }
+//        if(!user_type.toString().equals("admin")){
+//
+//        }
         return true;
     }
 
