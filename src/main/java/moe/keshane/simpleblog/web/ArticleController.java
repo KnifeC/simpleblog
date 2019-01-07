@@ -1,5 +1,6 @@
 package moe.keshane.simpleblog.web;
 
+import com.youbenzi.mdtool.tool.MDTool;
 import moe.keshane.simpleblog.common.SessionKey;
 import moe.keshane.simpleblog.dal.entity.Article;
 import moe.keshane.simpleblog.dal.entity.Comment;
@@ -68,6 +69,8 @@ public class ArticleController {
     @RequestMapping(value = "/article/{id}",method = RequestMethod.GET)
     public String article(@PathVariable("id") Integer id,ModelMap modelMap){
         Article article = readService.readById(id);
+        String markD = MDTool.markdown2Html(article.getContext());
+        article.setContext(markD);
         if(article == null){
             return "error";
         }
