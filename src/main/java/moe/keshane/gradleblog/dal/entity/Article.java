@@ -12,6 +12,7 @@ public class Article {
 
     private Date postdate;
     private String title;
+    @Lob
     private String context;
     private boolean hascomment = false;
 

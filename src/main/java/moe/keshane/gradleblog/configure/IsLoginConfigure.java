@@ -9,6 +9,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class IsLoginConfigure implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new PermissionIntercepter()).addPathPatterns("/deletearticle","/edit","/edit/**","/article","/write");
+        registry.addInterceptor(new PermissionIntercepter()).addPathPatterns("/deletearticle/**","/edit","/edit/**","/article","/write","/postcomment");
     }
 }

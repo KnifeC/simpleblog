@@ -2,12 +2,12 @@ package moe.keshane.gradleblog.service.implement;
 
 import moe.keshane.gradleblog.dal.ArticleRepo;
 import moe.keshane.gradleblog.dal.entity.Article;
-import moe.keshane.gradleblog.service.interfaces.PostService;
+import moe.keshane.gradleblog.service.interfaces.PostArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class PostServiceImpl implements PostService {
+public class PostArticleServiceImpl implements PostArticleService {
     @Autowired
     ArticleRepo articleRepo;
 

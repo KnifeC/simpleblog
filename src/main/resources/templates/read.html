@@ -8,6 +8,29 @@
 <body>
 <h1>{{title}}</h1>
 <p>{{context}}</p>
-</body>
+
+
+{{#hascomment}}
+<form method="post" action="/postcomment">
+    <input name="articleid" value="{{articleid}}" hidden/>
+    <textarea name="commentcontext" placeholder="comment content">
+    </textarea>
+    <button type="submit">发表评论</button>
+</form>
+{{/hascomment}}
+{{#comment_list}}
+<table>
+    <tr>
+        <th>user</th>
+        <th>comment</th>
+    </tr>
+    <tr>
+        <td>{{username}}</td>
+        <td>{{commentcontext}}</td>
+    </tr>
+</table>
+{{/comment_list}}
 {{/article}}
+</body>
+
 </html>

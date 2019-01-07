@@ -25,6 +25,7 @@ public class PermissionIntercepter implements HandlerInterceptor {
                 return true;
             }
             else{
+//                request.getRequestDispatcher("/login").forward(request,response);
                 return false;
             }
         }

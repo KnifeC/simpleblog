@@ -6,13 +6,21 @@ import javax.persistence.*;
 @Table(name = "comment")
 public class Comment {
     @Id
-    private int articleid;
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int inlineid;
+
+    private int articleid;
     @Column(nullable = true)
     private int replyid;
     private int userid;
+    @Lob
     private String commentcontext;
+
+    public Comment(int articleid,  int userid, String commentcontext) {
+        this.articleid = articleid;
+        this.userid = userid;
+        this.commentcontext = commentcontext;
+    }
 
     public Comment() {
     }
