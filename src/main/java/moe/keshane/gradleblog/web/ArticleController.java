@@ -41,7 +41,8 @@ public class ArticleController {
         if (articleForm.getTitle().replaceAll("\\s*", "").equals("")||articleForm.getContext().replaceAll("\\s*", "").equals("")){
             return "error";
         }
-        Article article = new Article(new Date(),articleForm.getTitle(),articleForm.getContext(),articleForm.isHascomment());
+        Article article = new Article(new Date(),articleForm.getTitle(),articleForm.getContext().replaceAll("\\\\n","\n"),articleForm.isHascomment());
+//        return article.getContext();
         Article post = postArticleService.postArticle(article);
         if(post != null){
             modelMap.put("ispost","文章发布成功,id="+post.getArticleid());

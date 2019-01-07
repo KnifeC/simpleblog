@@ -1,56 +1,38 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<title>Purple_loginform Website Template | Home :: w3layouts</title>
-<link href="/static/css/style.css" rel="stylesheet" type="text/css" media="all" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
-<!-- -->
-<script>var __links = document.querySelectorAll('a');function __linkClick(e) { parent.window.postMessage(this.href, '*');} ;for (var i = 0, l = __links.length; i < l; i++) {if ( __links[i].getAttribute('data-t') == '_blank' ) { __links[i].addEventListener('click', __linkClick, false);}}</script>
-<script src="/static/js/jquery.min.js"></script>
-<script>$(document).ready(function(c) {
-	$('.alert-close').on('click', function(c){
-		$('.message').fadeOut('slow', function(c){
-	  		$('.message').remove();
-		});
-	});	  
-});
-</script>
+    <title>Login</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 </head>
+
 <body>
-<!-- contact-form -->	
-<div class="message warning">
-<div class="inset">
-	<div class="login-head">
-		<h1>Login Form</h1>
-		 <div class="alert-close"> </div> 			
-	</div>
-		<form method="post" action="/login">
-			<li>
-				<input name="username" type="text" value="Username" class="text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Username';}"><a href="#" class=" icon user"></a>
-			</li>
-				<div class="clear"> </div>
-			<li>
-				<input name="password" type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}"> <a href="#" class="icon lock"></a>
-			</li>
-			<div class="clear"> </div>
-			<div class="submit">
-				<input type="submit" onclick="myFunction()" value="Sign in" class="btn">
-				<!--<button type="submit" class="btn">login</button>-->
-				<h4><a href="/register">Don't have an account ? Register now!</a></h4>
-						  <div class="clear">  </div>	
-			</div>
-				
-		</form>
-		</div>					
-	</div>
-	</div>
-	<div class="clear"> </div>
-<!--- footer --->
-<div class="footer">
-	<!--<p>Copyright &copy; 2014.</p>-->
+
+<div class="container ">
+    <form method="post" action="/login" class="form-group">
+        <div class="row col-md-6">
+            <h1 class="row h3 mb-3 font-weight-normal">Please sign in</h1>
+
+            <input class="row" id="iusername" name="username" placeholder="username" type="text"/>
+            <input class="row" id="ipassword" name="password" placeholder="password" type="password"/>
+            <button type="submit" class="row btn">log in</button>
+
+            <h4><a href="/register">Don't have an account ? Register now!</a></h4>
+        </div>
+
+</form>
 </div>
 
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
 </body>
 </html>
