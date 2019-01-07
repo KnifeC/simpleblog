@@ -1,5 +1,6 @@
 package moe.keshane.gradleblog.web;
 
+import moe.keshane.gradleblog.common.SessionKey;
 import moe.keshane.gradleblog.dal.entity.User;
 import moe.keshane.gradleblog.service.interfaces.LoginService;
 import moe.keshane.gradleblog.service.interfaces.RegService;
@@ -16,7 +17,7 @@ public class UserController {
 
     @Autowired
     private LoginService loginService;
-    @RequestMapping(value = "login",method = RequestMethod.POST)
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(UserForm userForm, ModelMap modelMap, HttpSession session)
     {
         User user = loginService.login(userForm.getUsername(),userForm.getPassword());
@@ -25,15 +26,22 @@ public class UserController {
             modelMap.put("success_content","无可奉告");
             return "home";
         }
-        session.setAttribute("user_id",user.getUserid());
+        session.setAttribute(SessionKey.USER_ID,user.getUserid());
+        session.setAttribute(SessionKey.USER_NAME,user.getUsername());
+        session.setAttribute(SessionKey.USER_TYPE,user.getType());
         modelMap.put("success_title","成功");
         modelMap.put("success_content","我一句话不说也不好");
         return "home";
     }
 
+    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    public String loginWeb(){
+        return "loginhtml";
+    }
+
     @Autowired
     private RegService regService;
-    @RequestMapping(value = "reg",method = RequestMethod.POST)
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
     public String reg(UserForm userForm,ModelMap modelMap){
         User user = new User(userForm.getUsername(),userForm.getPassword());
         User reg = regService.reg(user);
@@ -45,5 +53,9 @@ public class UserController {
             modelMap.put("success_content","搞个大新闻");
         }
         return "home";
+    }
+    @RequestMapping(value = "/register",method = RequestMethod.GET)
+    public String registerWeb(){
+        return "registerhtml";
     }
 }

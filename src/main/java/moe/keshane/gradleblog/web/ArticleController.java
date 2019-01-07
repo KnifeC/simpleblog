@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -26,9 +27,9 @@ public class ArticleController {
     @Autowired
     DeleteService deleteService;
 
-    @RequestMapping(value = "/article",method = RequestMethod.POST)
+    @RequestMapping(value = "/write",method = RequestMethod.POST)
     @ResponseBody
-    public String article(ArticleForm articleForm,ModelMap modelMap){
+    public String write(ArticleForm articleForm,ModelMap modelMap){
         Article article = new Article(new Date(),articleForm.getTitle(),articleForm.getContext(),articleForm.isHascomment());
         Article post = postService.postArticle(article);
         if(post != null){
@@ -40,10 +41,17 @@ public class ArticleController {
         }
     }
 
+    @RequestMapping(value = "/write",method = RequestMethod.GET)
+    public String write(HttpSession session,ModelMap modelMap){
+        modelMap.put("user_name","user");
+        return "postarticle";
+    }
+
     @RequestMapping(value = "/article",method = RequestMethod.GET)
     public String article(){
         return "redirect:list" ;
     }
+
 //    @GetMapping
 //    public String article(@PathVariable("id") Integer id){
     @RequestMapping(value = "/article/{id}",method = RequestMethod.GET)
@@ -70,6 +78,7 @@ public class ArticleController {
     @ResponseBody
     public String edit(EditForm editForm){
         Article saveArticle = new Article();
+        //处理时间
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
             Date dateTime = formatter.parse(editForm.getPostdate());
