@@ -15,17 +15,15 @@ public class PermissionIntercepter implements HandlerInterceptor {
         Object user_id = session.getAttribute(SessionKey.USER_ID);
         Object user_name = session.getAttribute(SessionKey.USER_NAME);
         Object user_type = session.getAttribute(SessionKey.USER_TYPE);
-        if(user_id == null || user_name == null){
-            request.setAttribute("msg","请先登录");
-            request.getRequestDispatcher("/login").forward(request,response);
+        if (user_id == null || user_name == null) {
+            request.setAttribute("msg", "请先登录");
+            response.sendRedirect("/login");
             return false;
         }
-        if(request.getRequestURI().equals("/edit")||request.getRequestURI().equals("/write")||request.getRequestURI().equals("/edit/**")||request.getRequestURI().equals("/deletearticle/**")){
-            if(user_type.toString().equals("admin")){
+        if (request.getRequestURI().equals("/edit") || request.getRequestURI().equals("/write") || request.getRequestURI().equals("/edit/**") || request.getRequestURI().equals("/deletearticle/**")) {
+            if (user_type.toString().equals("admin")) {
                 return true;
-            }
-            else{
-//                request.getRequestDispatcher("/login").forward(request,response);
+            } else {
                 return false;
             }
         }

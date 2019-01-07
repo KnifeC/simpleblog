@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>{{title}}</h1>
-<p>{{context}}</p>
+<div>{{context}}</div>
 
 
 {{#hascomment}}
@@ -17,19 +17,20 @@
     </textarea>
     <button type="submit">发表评论</button>
 </form>
-{{/hascomment}}
-{{#comment_list}}
+
 <table>
     <tr>
         <th>user</th>
         <th>comment</th>
     </tr>
+    {{/hascomment}}
+    {{#comment_list}}
     <tr>
         <td>{{username}}</td>
         <td>{{commentcontext}}</td>
     </tr>
+    {{/comment_list}}
 </table>
-{{/comment_list}}
 {{/article}}
 </body>
 

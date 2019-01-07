@@ -37,16 +37,18 @@ public class ArticleController {
     ReadCommentService readCommentService;
 
     @RequestMapping(value = "/write",method = RequestMethod.POST)
-    @ResponseBody
     public String write(ArticleForm articleForm,ModelMap modelMap){
+        if (articleForm.getTitle().replaceAll("\\s*", "").equals("")||articleForm.getContext().replaceAll("\\s*", "").equals("")){
+            return "error";
+        }
         Article article = new Article(new Date(),articleForm.getTitle(),articleForm.getContext(),articleForm.isHascomment());
         Article post = postArticleService.postArticle(article);
         if(post != null){
             modelMap.put("ispost","文章发布成功,id="+post.getArticleid());
-            return "文章发布成功,id="+post.getArticleid();
+            return "redirect:/index";
         }else{
             new ModelMap().put("ispost","文章发布失败");
-            return "文章发布失败";
+            return "error";
         }
     }
 
@@ -66,7 +68,7 @@ public class ArticleController {
     public String article(@PathVariable("id") Integer id,ModelMap modelMap){
         Article article = readService.readById(id);
         if(article == null){
-            return "forward:errorpage";
+            return "error";
         }
         if(article.isHascomment()){
             ArrayList<ReturnComment> comment_list = new ArrayList<>();
@@ -88,15 +90,17 @@ public class ArticleController {
     public String edit(@PathVariable("id") Integer id,ModelMap modelMap){
         Article editArticle = editService.getEditArticle(id);
         if(editArticle==null){
-            return "forward:errorpage";
+            return "error";
         }
         modelMap.put("edit_article",editArticle);
         return "editarticle";
     }
 
     @RequestMapping(value = "/edit",method = RequestMethod.POST)
-    @ResponseBody
     public String edit(EditForm editForm){
+        if(editForm.getTitle().replaceAll("\\s*","").equals("")||editForm.getContext().replaceAll("\\s*","").equals("")){
+            return "error";
+        }
         Article saveArticle = new Article();
         //处理时间
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -105,7 +109,7 @@ public class ArticleController {
             saveArticle.setPostdate(dateTime);
         } catch (ParseException e) {
             e.printStackTrace();
-            return "forward:errorpage";
+            return "error";
         }
         saveArticle.setArticleid(editForm.getArticleid());
         saveArticle.setContext(editForm.getContext());
@@ -113,16 +117,19 @@ public class ArticleController {
         saveArticle.setHascomment(editForm.isHascomment());
         Article article = editService.saveEditArticle(saveArticle);
         if(article==null){
-            return "修改失败";
+            return "error";
         }
-        return "redirect:/article"+saveArticle.getArticleid();
+        return "redirect:/article/"+saveArticle.getArticleid();
     }
 
     @RequestMapping(value = "/deletearticle/{id}",method = RequestMethod.GET)
     public String deleteArticle(@PathVariable("id") Integer articleid){
         boolean isDelete = deleteService.deleteArticleById(articleid);
-
-        return "redirect:/list";
+        if(isDelete) {
+            return "redirect:/list";
+        }else{
+            return "error";
+        }
 
     }
 

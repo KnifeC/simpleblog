@@ -19,6 +19,9 @@ public class CommentColtroller {
 
     @RequestMapping(value = "/postcomment", method = RequestMethod.POST)
     public String postComment(PostCommentForm postCommentForm, HttpSession session) {
+        if(postCommentForm.getCommentcontext().replaceAll("\\s*", "").equals("")){
+            return "error";
+        }
         Comment comment = new Comment(postCommentForm.getArticleid(), (int) session.getAttribute(SessionKey.USER_ID), postCommentForm.getCommentcontext());
         Comment posted = postCommentService.postComment(comment);
         if (posted != null) {

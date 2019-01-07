@@ -24,14 +24,14 @@ public class UserController {
         if(user == null){
             modelMap.put("success_title","失败了");
             modelMap.put("success_content","无可奉告");
-            return "home";
+            return "error";
         }
         session.setAttribute(SessionKey.USER_ID,user.getUserid());
         session.setAttribute(SessionKey.USER_NAME,user.getUsername());
         session.setAttribute(SessionKey.USER_TYPE,user.getType());
         modelMap.put("success_title","成功");
         modelMap.put("success_content","我一句话不说也不好");
-        return "home";
+        return "redirect:/index";
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
@@ -52,7 +52,7 @@ public class UserController {
             modelMap.put("success_title","失败了");
             modelMap.put("success_content","搞个大新闻");
         }
-        return "home";
+        return "redirect:/login";
     }
     @RequestMapping(value = "/register",method = RequestMethod.GET)
     public String registerWeb(){
