@@ -20,9 +20,14 @@ public class PermissionIntercepter implements HandlerInterceptor {
             request.getRequestDispatcher("/login").forward(request,response);
             return false;
         }
-//        if(!user_type.toString().equals("admin")){
-//
-//        }
+        if(request.getRequestURI().equals("/edit")||request.getRequestURI().equals("/write")||request.getRequestURI().equals("/edit/**")||request.getRequestURI().equals("/deletearticle/**")){
+            if(user_type.toString().equals("admin")){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
         return true;
     }
 
