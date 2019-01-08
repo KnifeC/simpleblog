@@ -56,6 +56,6 @@ public class UserController {
     }
     @RequestMapping(value = "/register",method = RequestMethod.GET)
     public String registerWeb(){
-        return "registerhtml_bak";
+        return "registerhtml";
     }
 }

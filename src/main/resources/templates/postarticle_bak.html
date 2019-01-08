@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>post article</title>
+</head>
+<body>
+<p>Hi,{{user_name}}</p>
+<form method="post" action="/write">
+    <input type="text" placeholder="title" name="title"/>
+    <textarea name="context"></textarea>
+    <input type="checkbox" name="hascomment"/>
+    <label>open comment?</label>
+    <button type="submit">post</button>
+</form>
+</body>
+</html>

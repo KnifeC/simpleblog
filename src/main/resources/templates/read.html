@@ -1,39 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
+{{>layout/head}}
+
 {{#article}}
-<head>
-    <meta charset="UTF-8">
-    <title>{{title}}</title>
+<title>{{title}}</title>
 </head>
 <body>
-<h1>{{title}}</h1>
+{{>layout/navbar}}
+<header class="masthead" style="background-image: url('img/post-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="post-heading">
+                    <h1>{{title}}</h1>
+                    <span class="meta">{{postdate}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
 
-<div>
-{{{context}}}
-</div>
+
+<article>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                {{{context}}}
+            </div>
+        </div>
+    </div>
+    <hr/>
+</article>
 
 {{#hascomment}}
-<form method="post" action="/postcomment">
-    <input name="articleid" value="{{articleid}}" hidden/>
-    <textarea name="commentcontext" placeholder="comment content">
-    </textarea>
-    <button type="submit">发表评论</button>
-</form>
 
-<table>
-    <tr>
-        <th>user</th>
-        <th>comment</th>
-    </tr>
-    {{/hascomment}}
-    {{#comment_list}}
-    <tr>
-        <td>{{username}}</td>
-        <td>{{commentcontext}}</td>
-    </tr>
-    {{/comment_list}}
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            <h1>COMMENT : </h1>
+            <!--{{^username}}-->
+            <!--<a href="/login" class="btn btn-primary">logging to comment</a>-->
+            <!--{{/username}}-->
+            <!--{{#username}}-->
+            <!--<h3>{{.}} Welcome Comment </h3>-->
+            <form method="post" action="/postcomment">
+                <input name="articleid" value="{{articleid}}" hidden/>
+                <div class="form-group col-xs-12 floating-label-form-group controls">
+                    <label>commentcontext</label>
+                    <textarea name="commentcontext" maxlength="300" rows="1" class="form-control"
+                              placeholder="commentcontext" id="message"
+                              required data-validation-required-message="Please enter a commentcontext."></textarea>
+                    <p class="help-block text-danger"></p>
+                </div>
+                <div id="success"></div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary" id="sendMessageButton">post comment</button>
+                </div>
+            </form>
+            <!--{{/username}}-->
+        </div>
+    </div>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            {{#comment_list}}
+            <div class="post-preview">
+                <p class="post-title">
+                    {{commentcontext}}
+                </p>
+                <p class="post-subtitle">
+                    comment by : {{username}}
+                </p>
+                <!--<p class="post-meta">{{postdate}}</p>-->
+                {{#adminpermission}}
+                <a class="btn btn-light" href="/#">delete this(no function)</a>
+                {{/adminpermission}}
+            </div>
+            <hr>
+            {{/comment_list}}
+        </div>
+    </div>
+</div>
+{{/hascomment}}
 {{/article}}
+{{>layout/script}}
 </body>
 
 </html>

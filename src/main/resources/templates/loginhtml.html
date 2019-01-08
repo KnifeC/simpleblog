@@ -1,40 +1,75 @@
-<!DOCTYPE HTML>
-<html>
+{{>layout/head}}
+<title>login</title>
+  </head>
 
-<head>
-    <title>Login</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-          crossorigin="anonymous">
-</head>
+  <body>
 
-<body>
+    <!-- Navigation -->
+    {{>layout/navbar}}
 
-<div class="container ">
-    <form method="post" action="/login">
-        <div>
-            <div>
-                <!-- <h1 >Please sign in</h1> -->
-                <input id="iusername" name="username" placeholder="username" type="text"/>
-                <input id="ipassword" name="password" placeholder="password" type="password"/>
-                <button type="submit" class="row btn">log in</button>
-                <h4><a href="/register">Don't have an account ? Register now!</a></h4>
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('img/contact-bg.jpg')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="page-heading">
+              <h1>LOGIN</h1>
+              <span class="subheading">You need login to use more function</span>
             </div>
+          </div>
         </div>
-    </form>
-</div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <p>Input Your Username And Password</p>
+          <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
+          <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
+          <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+          <form method="post" action="/login">
+            <div class="control-group">
+              <div class="form-group floating-label-form-group controls">
+                <label>username</label>
+                <input type="text" class="form-control" placeholder="username" name="username" id="name" required data-validation-required-message="Please enter your username.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <div class="control-group">
+              <div class="form-group col-xs-12 floating-label-form-group controls">
+                <label>password</label>
+                <input type="password" class="form-control" placeholder="password" name="password" id="phone" required data-validation-required-message="Please enter your phone number.">
+                <p class="help-block text-danger"></p>
+              </div>
+            </div>
+            <!--<div class="control-group">-->
+              <!--<div class="form-group floating-label-form-group controls">-->
+                <!--<label>Message</label>-->
+                <!--<textarea rows="5" class="form-control" placeholder="Message" id="message" required data-validation-required-message="Please enter a message."></textarea>-->
+                <!--<p class="help-block text-danger"></p>-->
+              <!--</div>-->
+            <!--</div>-->
+            <br>
+            <div id="success"></div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary" id="sendMessageButton">Login</button>
+            </div>
+          </form>
+          <div class="form-group">
+            <a href="/register"><button class="btn btn-primary" id="getregister">Register</button></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr>
 
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
-        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
-        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
-        crossorigin="anonymous"></script>
-</body>
+    <!-- Bootstrap core JavaScript -->
+    {{>layout/script}}
 
+  </body>
 </html>

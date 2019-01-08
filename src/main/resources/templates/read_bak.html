@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+{{#article}}
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+<body>
+<h1>{{title}}</h1>
+
+<div>
+{{{context}}}
+</div>
+
+{{#hascomment}}
+<form method="post" action="/postcomment">
+    <input name="articleid" value="{{articleid}}" hidden/>
+    <textarea name="commentcontext" placeholder="comment content">
+    </textarea>
+    <button type="submit">发表评论</button>
+</form>
+
+<table>
+    <tr>
+        <th>user</th>
+        <th>comment</th>
+    </tr>
+    {{/hascomment}}
+    {{#comment_list}}
+    <tr>
+        <td>{{username}}</td>
+        <td>{{commentcontext}}</td>
+    </tr>
+    {{/comment_list}}
+</table>
+{{/article}}
+</body>
+
+</html>

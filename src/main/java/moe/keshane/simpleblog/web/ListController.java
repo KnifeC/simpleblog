@@ -23,9 +23,9 @@ public class ListController {
         //对文章进行切片
         if(articles!=null) {
             for(Article article : articles){
-                if(article.getContext().toCharArray().length>100){
+                if(article.getContext().toCharArray().length>50){
                     char[] dst = article.getContext().toCharArray();
-                    article.setContext(String.valueOf(dst,0,98)+"...");
+                    article.setContext(String.valueOf(dst,0,48)+"...");
                 }
             }
             Object username = session.getAttribute(SessionKey.USER_NAME);
@@ -38,6 +38,6 @@ public class ListController {
         }else{
             modelMap.put("articlelist","没有数据");
         }
-        return "listarticle";
+        return "indexhtml";
     }
 }

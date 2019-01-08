@@ -1,0 +1,66 @@
+{{>layout/head}}
+<title>ALPHABET Simple Blog</title>
+</head>
+
+<body>
+
+{{>layout/navbar}}
+
+<!-- Page Header -->
+<header class="masthead" style="background-image: url('img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <div class="site-heading">
+                    <h1>ALPHABET Simple Blog</h1>
+                    <span class="subheading">A Blog Create by ALPHABET</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+            {{#articlelist}}
+            <div class="post-preview">
+                <a href="/article/{{articleid}}">
+                    <h2 class="post-title">
+                        {{title}}
+                    </h2>
+                    <h3 class="post-subtitle">
+                        {{context}}
+                    </h3>
+                </a>
+                <p class="post-meta">{{postdate}}</p>
+                {{#adminpermission}}
+                <a  class="btn btn-light" >hascomment:{{hascomment}}</a>
+                <a  class="btn btn-light" href="/edit/{{articleid}}">edit this</a>
+                <a class="btn btn-light" href="/deletearticle/{{articleid}}">delete this</a>
+                {{/adminpermission}}
+            </div>
+            <hr>
+            {{/articlelist}}
+
+            <!-- Pager -->
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="clearfix col-lg-2 col-md-4 mx-auto">
+            <a class="btn btn-primary float-left" href="#">&larr;Precious Page </a>
+        </div>
+        <div class="clearfix col-lg-2 col-md-4 mx-auto">
+            <a class="btn btn-primary float-right" href="#">Next Page &rarr;</a>
+        </div>
+    </div>
+</div>
+
+
+
+{{>layout/script}}
+
+</body>
+</html>

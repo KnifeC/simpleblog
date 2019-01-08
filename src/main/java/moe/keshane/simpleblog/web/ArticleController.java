@@ -37,72 +37,88 @@ public class ArticleController {
     @Autowired
     ReadCommentService readCommentService;
 
-    @RequestMapping(value = "/write",method = RequestMethod.POST)
-    public String write(ArticleForm articleForm,ModelMap modelMap){
-        if (articleForm.getTitle().replaceAll("\\s*", "").equals("")||articleForm.getContext().replaceAll("\\s*", "").equals("")){
+    @RequestMapping(value = "/write", method = RequestMethod.POST)
+    public String write(ArticleForm articleForm, ModelMap modelMap) {
+        if (articleForm.getTitle().replaceAll("\\s*", "").equals("") || articleForm.getContext().replaceAll("\\s*", "").equals("")) {
             return "error";
         }
-        Article article = new Article(new Date(),articleForm.getTitle(),articleForm.getContext().replaceAll("\\\\n","\n"),articleForm.isHascomment());
-//        return article.getContext();
+        Article article = new Article(new Date(), articleForm.getTitle(), articleForm.getContext().replaceAll("\\\\n", "\n"), articleForm.isHascomment());
         Article post = postArticleService.postArticle(article);
-        if(post != null){
-            modelMap.put("ispost","文章发布成功,id="+post.getArticleid());
+        if (post != null) {
+            modelMap.put("ispost", "文章发布成功,id=" + post.getArticleid());
             return "redirect:/index";
-        }else{
-            new ModelMap().put("ispost","文章发布失败");
+        } else {
+            new ModelMap().put("ispost", "文章发布失败");
             return "error";
         }
     }
 
-    @RequestMapping(value = "/write",method = RequestMethod.GET)
-    public String write(HttpSession session,ModelMap modelMap){
-        modelMap.put("user_name",session.getAttribute(SessionKey.USER_NAME));
+    @RequestMapping(value = "/write", method = RequestMethod.GET)
+    public String write(HttpSession session, ModelMap modelMap) {
+        Object username = session.getAttribute(SessionKey.USER_NAME);
+        Object usertype = session.getAttribute(SessionKey.USER_TYPE);
+        if (usertype != null && usertype.toString().equals("admin")) {
+            modelMap.put("adminpermission", true);
+        }
+        modelMap.put("username", username);
         return "postarticle";
     }
 
-    @RequestMapping(value = "/article",method = RequestMethod.GET)
-    public String article(){
-        return "redirect:list" ;
+    @RequestMapping(value = "/article", method = RequestMethod.GET)
+    public String article() {
+        return "redirect:list";
     }
 
 
-    @RequestMapping(value = "/article/{id}",method = RequestMethod.GET)
-    public String article(@PathVariable("id") Integer id,ModelMap modelMap){
+    @RequestMapping(value = "/article/{id}", method = RequestMethod.GET)
+    public String article(@PathVariable("id") Integer id, ModelMap modelMap, HttpSession session) {
+        Object username = session.getAttribute(SessionKey.USER_NAME);
+        Object usertype = session.getAttribute(SessionKey.USER_TYPE);
+        if (usertype != null && usertype.toString().equals("admin")) {
+            modelMap.put("adminpermission", true);
+        }
+        modelMap.put("username", username);
         Article article = readService.readById(id);
         String markD = MDTool.markdown2Html(article.getContext());
         article.setContext(markD);
-        if(article == null){
+        if (article == null) {
             return "error";
         }
-        if(article.isHascomment()){
+        if (article.isHascomment()) {
             ArrayList<ReturnComment> comment_list = new ArrayList<>();
             Comment[] comments = readCommentService.getCommentByArticleid(id);
             ArrayList<User> userList = new ArrayList<>();
-            for(Comment c: comments){
+            for (Comment c : comments) {
                 int userid = c.getUserid();
                 User user = userService.findUserByUserid(userid);
-                ReturnComment returnComment = new ReturnComment(c.getArticleid(),c.getInlineid(),user.getUserid(),user.getUsername(),c.getCommentcontext());
+                ReturnComment returnComment = new ReturnComment(c.getArticleid(), c.getInlineid(), user.getUserid(), user.getUsername(), c.getCommentcontext());
                 comment_list.add(returnComment);
             }
-            modelMap.put("comment_list",comment_list);
+            modelMap.put("comment_list", comment_list);
         }
-        modelMap.put("article",article);
-        return "read";
+        modelMap.put("article", article);
+        return "readarticle";
     }
 
-    @RequestMapping(value = "/edit/{id}",method = RequestMethod.GET)
-    public String edit(@PathVariable("id") Integer id,ModelMap modelMap){
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String edit(@PathVariable("id") Integer id, ModelMap modelMap, HttpSession session) {
+        Object username = session.getAttribute(SessionKey.USER_NAME);
+        Object usertype = session.getAttribute(SessionKey.USER_TYPE);
+        if (usertype != null && usertype.toString().equals("admin")) {
+            modelMap.put("adminpermission", true);
+        }
+        modelMap.put("username", username);
         Article editArticle = editService.getEditArticle(id);
-        if(editArticle==null){
+        if (editArticle == null) {
             return "error";
         }
-        modelMap.put("edit_article",editArticle);
+        modelMap.put("edit_article", editArticle);
         return "editarticle";
     }
 
-    @RequestMapping(value = "/edit",method = RequestMethod.POST)
-    public String edit(EditForm editForm){
-        if(editForm.getTitle().replaceAll("\\s*","").equals("")||editForm.getContext().replaceAll("\\s*","").equals("")){
+    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    public String edit(EditForm editForm) {
+        if (editForm.getTitle().replaceAll("\\s*", "").equals("") || editForm.getContext().replaceAll("\\s*", "").equals("")) {
             return "error";
         }
         Article saveArticle = new Article();
@@ -120,18 +136,18 @@ public class ArticleController {
         saveArticle.setTitle(editForm.getTitle());
         saveArticle.setHascomment(editForm.isHascomment());
         Article article = editService.saveEditArticle(saveArticle);
-        if(article==null){
+        if (article == null) {
             return "error";
         }
-        return "redirect:/article/"+saveArticle.getArticleid();
+        return "redirect:/article/" + saveArticle.getArticleid();
     }
 
-    @RequestMapping(value = "/deletearticle/{id}",method = RequestMethod.GET)
-    public String deleteArticle(@PathVariable("id") Integer articleid){
+    @RequestMapping(value = "/deletearticle/{id}", method = RequestMethod.GET)
+    public String deleteArticle(@PathVariable("id") Integer articleid) {
         boolean isDelete = deleteService.deleteArticleById(articleid);
-        if(isDelete) {
+        if (isDelete) {
             return "redirect:/list";
-        }else{
+        } else {
             return "error";
         }
 

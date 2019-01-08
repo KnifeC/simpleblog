@@ -14,7 +14,7 @@ public class ReadCommentServiceImple implements ReadCommentService {
     @Override
     public Comment[] getCommentByArticleid(int articleid) {
         try {
-            Comment[] all = commentRepo.findAllByArticleidOrderByInlineid(articleid);
+            Comment[] all = commentRepo.findAllByArticleidOrderByInlineidDesc(articleid);
             return all;
         }catch(Exception e){
             e.printStackTrace();
