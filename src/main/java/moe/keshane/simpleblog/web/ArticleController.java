@@ -87,7 +87,6 @@ public class ArticleController {
         if (article.isHascomment()) {
             ArrayList<ReturnComment> comment_list = new ArrayList<>();
             Comment[] comments = readCommentService.getCommentByArticleid(id);
-            ArrayList<User> userList = new ArrayList<>();
             for (Comment c : comments) {
                 int userid = c.getUserid();
                 User user = userService.findUserByUserid(userid);
@@ -96,6 +95,7 @@ public class ArticleController {
             }
             modelMap.put("comment_list", comment_list);
         }
+        modelMap.put("artile_title",article.getTitle());
         modelMap.put("article", article);
         return "read";
     }
