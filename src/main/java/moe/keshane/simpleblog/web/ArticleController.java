@@ -97,7 +97,7 @@ public class ArticleController {
             modelMap.put("comment_list", comment_list);
         }
         modelMap.put("article", article);
-        return "readarticle";
+        return "read";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
