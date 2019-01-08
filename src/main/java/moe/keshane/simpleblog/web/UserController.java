@@ -2,6 +2,7 @@ package moe.keshane.simpleblog.web;
 
 import moe.keshane.simpleblog.common.SessionKey;
 import moe.keshane.simpleblog.dal.entity.User;
+import moe.keshane.simpleblog.service.interfaces.AdminService;
 import moe.keshane.simpleblog.service.interfaces.LoginService;
 import moe.keshane.simpleblog.service.interfaces.RegService;
 import moe.keshane.simpleblog.web.forms.UserForm;
@@ -11,6 +12,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 @Controller
 public class UserController {
@@ -58,4 +60,17 @@ public class UserController {
     public String registerWeb(){
         return "registerhtml";
     }
+
+    @Autowired
+    AdminService adminService;
+    @RequestMapping(value = "/admin",method = RequestMethod.GET)
+    public String admin(ModelMap modelMap){
+        ArrayList<User> allUserInfo = adminService.getAllUserInfo();
+        if(allUserInfo==null){
+            return "error";
+        }
+        modelMap.put("userinfo",allUserInfo);
+        return "admin";
+    }
+
 }

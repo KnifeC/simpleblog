@@ -34,14 +34,14 @@
                 <input name="articleid" value="{{articleid}}" hidden/>
                 <div class="control-group">
                     <div class="form-group col-xs-12 floating-label-form-group controls">
-                        <label>post date</label>
+                        <p>Post Date</p>
                         <input type="text" name="postdate" class="form-control" placeholder="title" name="Title" value="{{postdate}}" readonly>
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>
                 <div class="control-group">
                     <div class="form-group col-xs-12 floating-label-form-group controls">
-                        <label>password</label>
+                        <p>Title</p>
                         <input type="text" class="form-control" placeholder="title" name="title" id="phone"
                                required data-validation-required-message="Please enter your title." value="{{title}}">
                         <p class="help-block text-danger"></p>
@@ -49,8 +49,8 @@
                 </div>
                 <div class="control-group">
                     <div class="form-group floating-label-form-group controls">
-                        <label>Content</label>
-                        <textarea name="context" rows="10" class="form-control" placeholder="Content" id="message"
+                        <p>Content</p>
+                        <textarea name="context" rows="10" class="form-control" placeholder="Content" id="postarticle"
                                   required data-validation-required-message="Please enter a message.">{{context}}</textarea>
                         <p class="help-block text-danger"></p>
                     </div>
@@ -76,5 +76,28 @@
 <hr>
 
 {{>layout/script}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+<script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
+<script>
+    var simplemde = new SimpleMDE({
+        element: document.getElementById("postarticle"),
+        spellChecker: false,
+        autofocus: true,
+        autoDownloadFontAwesome: false,
+        autosave: {
+            enabled: true,
+            uniqueId: "demo",
+            delay: 1000,
+        },
+        tabSize: 4,
+        status: false,
+        lineWrapping: false,
+        renderingConfig: {
+            codeSyntaxHighlighting: true
+        },
+    });
+</script>
 </body>
 </html>
