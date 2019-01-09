@@ -88,4 +88,10 @@ public class UserController {
         return "redirect:/admin";
     }
 
+    @RequestMapping(value = "/logout",method = RequestMethod.GET)
+    public String logOut(HttpSession session){
+        session.invalidate();
+        return "redirect:/index";
+    }
+
 }
