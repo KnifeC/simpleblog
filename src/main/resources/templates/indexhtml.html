@@ -36,8 +36,8 @@
                 </a>
                 <p class="post-meta">{{postdate}}</p>
                 {{#adminpermission}}
-                <a  class="btn btn-light" >hascomment:{{hascomment}}</a>
-                <a  class="btn btn-light" href="/edit/{{articleid}}">edit this</a>
+                <a class="btn btn-light">hascomment:{{hascomment}}</a>
+                <a class="btn btn-light" href="/edit/{{articleid}}">edit this</a>
                 <a class="btn btn-light" href="/deletearticle/{{articleid}}">delete this</a>
                 {{/adminpermission}}
             </div>
@@ -50,21 +50,39 @@
     </div>
     <div class="row">
         <div class="clearfix col-lg-2 col-md-4 mx-auto">
-            <a class="btn btn-primary float-left" id="prepage" href="/list?page={{pageindex}}"-1>&larr;Precious Page </a>
+            <a class="btn btn-primary float-left" id="prepage" value="{{pageindex}}">&larr;Precious Page </a>
         </div>
         <div class="clearfix col-lg-2 col-md-4 mx-auto">
-            <a class="btn btn-primary float-right" id="nextpage" href="/list?page={{pageindex}}"+1>Next Page &rarr;</a>
+            <a class="btn btn-primary float-right" id="nextpage" value="{{pageindex}}">Next Page &rarr;</a>
         </div>
+        <label id="pagenum" value="{{pagenum}}" hidden></label>
     </div>
 </div>
 
 
 <script>
     var prepage = document.getElementById("prepage");
-    prepage.onclick = function (){
-
+    var nextpage = document.getElementById("nextpage");
+    var pagenum = document.getElementById("pagenum");
+    prepage.onclick = function () {
+        if (parseInt(prepage.value) === 0) {
+            alert('this is the first page');
+            return;
+        } else {
+            page = parseInt(prepage.value) - 1;
+            window.location.href = "/list?page=" + page;
+        }
+        print("hahaha");
     }
-    var lastpage = document.getElementById("prepage");
+    nextpage.onclick = function () {
+        if (parseInt(nextpage.value) === parseInt(pagenum.value)) {
+            alert('this is the last page');
+        } else {
+            page = parseInt(nextpage.value) + 1;
+            window.location.href = "/list?page=" + page;
+        }
+        print("lalala");
+    }
 </script>
 {{>layout/script}}
 

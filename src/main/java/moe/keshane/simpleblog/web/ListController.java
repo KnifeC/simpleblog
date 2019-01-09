@@ -39,6 +39,7 @@ public class ListController {
             modelMap.put("username",username);
             modelMap.put("articlePage", articlePage);
             modelMap.put("pageindex",page);
+            modelMap.put("pagenum",articlePage.getTotalPages());
         }else{
             modelMap.put("articlePage","没有数据");
         }
