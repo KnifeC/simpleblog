@@ -82,3 +82,29 @@ return redirect:/index
 method = POST
 return redirect:/article/{id}
 ```
+
+## 管理相关
+* 进入管理界面
+```
+/admin
+method = GET
+return admin.html
+```
+
+## 图床相关
+* 获取相册
+```$xslt
+/photo
+method = GET
+return photomanage.html
+```
+
+## 主页/列表
+```$xslt
+/list
+/
+index
+method = GET
+page = ?(nullable)
+return indexhtml.html
+```

@@ -45,10 +45,10 @@ public class ArticleController {
         Article article = new Article(new Date(), articleForm.getTitle(), articleForm.getContext().replaceAll("\\\\n", "\n"), articleForm.isHascomment());
         Article post = postArticleService.postArticle(article);
         if (post != null) {
-            modelMap.put("ispost", "文章发布成功,id=" + post.getArticleid());
+//            modelMap.put("ispost", "文章发布成功,id=" + post.getArticleid());
             return "redirect:/index";
         } else {
-            new ModelMap().put("ispost", "文章发布失败");
+//            new ModelMap().put("ispost", "文章发布失败");
             return "error";
         }
     }

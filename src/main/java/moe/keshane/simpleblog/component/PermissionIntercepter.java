@@ -20,7 +20,7 @@ public class PermissionIntercepter implements HandlerInterceptor {
             response.sendRedirect("/login");
             return false;
         }
-        if (request.getRequestURI().equals("/edit") || request.getRequestURI().equals("/write") || request.getRequestURI().equals("/edit/**") || request.getRequestURI().equals("/deletearticle/**")) {
+        if (request.getRequestURI().equals("/admin")||request.getRequestURI().equals("/photo")||request.getRequestURI().equals("/edit") || request.getRequestURI().equals("/write") || request.getRequestURI().equals("/edit/**") || request.getRequestURI().equals("/deletearticle/**")) {
             if (user_type.toString().equals("admin")) {
                 return true;
             } else {

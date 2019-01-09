@@ -42,8 +42,7 @@
                 <div class="control-group">
                     <div class="form-group floating-label-form-group controls">
                         <p>Content</p>
-                        <textarea name="context" rows="10" class="form-control" placeholder="content" id="postarticle"
-                                  required data-validation-required-message="Please enter a message."></textarea>
+                        <textarea name="context" rows="10" class="form-control" placeholder="content" id="postarticle"></textarea>
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>
@@ -59,7 +58,7 @@
                 <br>
                 <div id="success"></div>
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" id="sendMessageButton">POST</button>
+                    <button type="submit" class="btn btn-primary" >POST</button>
                 </div>
             </form>
         </div>
@@ -67,30 +66,17 @@
 </div>
 
 <hr>
+
+
+{{>layout/script}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 <script src="https://cdn.jsdelivr.net/highlight.js/latest/highlight.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
 <script>
     var simplemde = new SimpleMDE({
-        element: document.getElementById("postarticle"),
-        spellChecker: false,
-        autofocus: true,
-        autoDownloadFontAwesome: false,
-        autosave: {
-            enabled: true,
-            uniqueId: "demo",
-            delay: 1000,
-        },
-        tabSize: 4,
-        status: false,
-        lineWrapping: false,
-        renderingConfig: {
-            codeSyntaxHighlighting: true
-        },
-    });
+        element: document.getElementById("postarticle")});
 </script>
-{{>layout/script}}
 
 </body>
 </html>

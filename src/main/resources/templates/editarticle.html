@@ -1,12 +1,12 @@
 {{>layout/head}}
-<title>write new article</title>
+<title>edit article</title>
 </head>
 
 <body>
 
 <!-- Navigation -->
 {{>layout/navbar}}
-{{#edit_article}}
+
 
 <header class="masthead" style="background-image: url('/img/contact-bg.jpg')">
     <div class="overlay"></div>
@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="page-heading">
-                    <h1>WRITE</h1>
+                    <h1>EDIT</h1>
                     <span class="subheading">edit article</span>
                 </div>
             </div>
@@ -30,12 +30,14 @@
             <!-- Contact Form - Enter your email address on line 19 of the mail/contact_me.php file to make this form work. -->
             <!-- WARNING: Some web hosts do not allow emails to be sent through forms to common mail hosts like Gmail or Yahoo. It's recommended that you use a private domain email address! -->
             <!-- To use the contact form, your site must be on a live web host with PHP! The form will not work locally! -->
+            {{#edit_article}}
             <form method="post" action="/edit">
                 <input name="articleid" value="{{articleid}}" hidden/>
                 <div class="control-group">
                     <div class="form-group col-xs-12 floating-label-form-group controls">
                         <p>Post Date</p>
-                        <input type="text" name="postdate" class="form-control" placeholder="title" name="Title" value="{{postdate}}" readonly>
+                        <input type="text" name="postdate" class="form-control" placeholder="title" name="Title"
+                               value="{{postdate}}" readonly>
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>
@@ -50,15 +52,15 @@
                 <div class="control-group">
                     <div class="form-group floating-label-form-group controls">
                         <p>Content</p>
-                        <textarea name="context" rows="10" class="form-control" placeholder="Content" id="postarticle"
-                                  required data-validation-required-message="Please enter a message.">{{context}}</textarea>
+                        <textarea name="context" rows="10" class="form-control" placeholder="Content" id="editarticle">{{context}}</textarea>
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>
                 <div class="control-group">
                     <div class="form-group col-xs-12 controls">
                         <br/>
-                        <input type="checkbox" class="form-check-input" placeholder="Open Comment" name="hascomment" id="hascomment" checked="{{hascomment}}">
+                        <input type="checkbox" class="form-check-input" placeholder="Open Comment" name="hascomment"
+                               id="hascomment" checked="{{hascomment}}">
                         <label>Open Comment?</label>
                         <p class="help-block text-danger"></p>
                     </div>
@@ -69,10 +71,11 @@
                     <button type="submit" class="btn btn-primary" id="sendMessageButton">EDIT</button>
                 </div>
             </form>
+            {{/edit_article}}
         </div>
     </div>
 </div>
-{{/edit_article}}
+
 <hr>
 
 {{>layout/script}}
@@ -82,21 +85,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/highlight.js/latest/styles/github.min.css">
 <script>
     var simplemde = new SimpleMDE({
-        element: document.getElementById("postarticle"),
-        spellChecker: false,
-        autofocus: true,
-        autoDownloadFontAwesome: false,
-        autosave: {
-            enabled: true,
-            uniqueId: "demo",
-            delay: 1000,
-        },
-        tabSize: 4,
-        status: false,
-        lineWrapping: false,
-        renderingConfig: {
-            codeSyntaxHighlighting: true
-        },
+        element: document.getElementById("editarticle")
     });
 </script>
 </body>

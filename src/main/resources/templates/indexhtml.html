@@ -24,7 +24,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            {{#articlelist}}
+            {{#articlePage}}
             <div class="post-preview">
                 <a href="/article/{{articleid}}">
                     <h2 class="post-title">
@@ -42,7 +42,7 @@
                 {{/adminpermission}}
             </div>
             <hr>
-            {{/articlelist}}
+            {{/articlePage}}
 
             <!-- Pager -->
 
@@ -50,16 +50,22 @@
     </div>
     <div class="row">
         <div class="clearfix col-lg-2 col-md-4 mx-auto">
-            <a class="btn btn-primary float-left" href="#">&larr;Precious Page </a>
+            <a class="btn btn-primary float-left" id="prepage" href="/list?page={{pageindex}}"-1>&larr;Precious Page </a>
         </div>
         <div class="clearfix col-lg-2 col-md-4 mx-auto">
-            <a class="btn btn-primary float-right" href="#">Next Page &rarr;</a>
+            <a class="btn btn-primary float-right" id="nextpage" href="/list?page={{pageindex}}"+1>Next Page &rarr;</a>
         </div>
     </div>
 </div>
 
 
+<script>
+    var prepage = document.getElementById("prepage");
+    prepage.onclick = function (){
 
+    }
+    var lastpage = document.getElementById("prepage");
+</script>
 {{>layout/script}}
 
 </body>

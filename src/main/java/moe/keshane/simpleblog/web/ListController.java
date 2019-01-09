@@ -4,10 +4,12 @@ import moe.keshane.simpleblog.common.SessionKey;
 import moe.keshane.simpleblog.dal.entity.Article;
 import moe.keshane.simpleblog.service.interfaces.ListService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
@@ -18,8 +20,9 @@ public class ListController {
     @Autowired
     ListService listService;
     @RequestMapping(value = "/list",method = RequestMethod.GET)
-    public String list(ModelMap modelMap, HttpSession session){
+    public String list(ModelMap modelMap, HttpSession session, @RequestParam(value = "page",required = false,defaultValue = "1")Integer page){
         ArrayList<Article> articles = listService.listAllArticle();
+        Page<Article> articlePage = listService.listPageArticle(page);
         //对文章进行切片
         if(articles!=null) {
             for(Article article : articles){
@@ -34,9 +37,10 @@ public class ListController {
                 modelMap.put("adminpermission",true);
             }
             modelMap.put("username",username);
-            modelMap.put("articlelist", articles);
+            modelMap.put("articlePage", articlePage);
+            modelMap.put("pageindex",page);
         }else{
-            modelMap.put("articlelist","没有数据");
+            modelMap.put("articlePage","没有数据");
         }
         return "indexhtml";
     }
