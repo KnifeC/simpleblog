@@ -2,6 +2,40 @@
 <title>ADMIN</title>
 </head>
 <body>
+<table class="table">
+    <tr>
+        <th>userid</th>
+        <th>username</th>
+        <th>password</th>
+        <th>type</th>
+        <th>update</th>
+        <th>delete</th>
+    </tr>
+    {{#userinfo}}
+    <!--vate int userid;-->
+    <!--private String username;-->
+    <!--private String password;-->
+    <!--private String type;-->
+    <form method="post" action="/updateuser">
+        <tr>
+            <td><input type="text" name="userid" value="{{userid}}" readonly/></td>
+            <td><input type="text" name="username" value="{{username}}"/></td>
+            <td><input type="text" name="password" value="{{password}}"/></td>
+            <td><select type="selectbox" name="type" id="usertype">
+                <option value="" disabled selected>{{type}}</option>
+                <option value="user">user</option>
+                <option value="admin">admin</option>
+                <option value="ban">ban</option>
+            </select></td>
+            <td>
+                <button class="btn btn-light" type="submit">更新修改</button>
+            </td>
+            <td><a class="btn btn-light">删除</a></td>
+        </tr>
+    </form>
 
+
+    {{/userinfo}}
+</table>
 </body>
 </html>

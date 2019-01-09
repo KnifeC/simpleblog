@@ -5,6 +5,8 @@ import moe.keshane.simpleblog.dal.entity.User;
 import moe.keshane.simpleblog.service.interfaces.AdminService;
 import moe.keshane.simpleblog.service.interfaces.LoginService;
 import moe.keshane.simpleblog.service.interfaces.RegService;
+import moe.keshane.simpleblog.service.interfaces.UpdateUserService;
+import moe.keshane.simpleblog.web.forms.UpdateUserForm;
 import moe.keshane.simpleblog.web.forms.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,6 +73,19 @@ public class UserController {
         }
         modelMap.put("userinfo",allUserInfo);
         return "admin";
+    }
+
+    @Autowired
+    UpdateUserService updateUserService;
+    @RequestMapping(value = "/updateuser",method = RequestMethod.POST)
+    public String updateUser(UpdateUserForm updateUserForm){
+        if(updateUserForm.getType()==null||updateUserForm.getType().equals("")){
+            updateUserForm.setType("user");
+        }
+        User user = new User(updateUserForm.getUsername(),updateUserForm.getPassword(),updateUserForm.getType());
+        user.setUserid(updateUserForm.getUserid());
+        updateUserService.updateUser(user);
+        return "redirect:/admin";
     }
 
 }
