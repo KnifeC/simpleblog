@@ -6,6 +6,7 @@ import com.youbenzi.mdtool.tool.MDTool;
 import moe.keshane.simpleblog.common.SessionKey;
 import moe.keshane.simpleblog.dal.entity.Image;
 import moe.keshane.simpleblog.service.interfaces.ImageService;
+import moe.keshane.simpleblog.web.returnset.ReturnImage;
 import moe.keshane.simpleblog.web.returnset.ReturnImageJson;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -48,11 +49,12 @@ public class ImageController {
         }
         modelMap.put("username",username);
         ArrayList<Image> allImage = imageService.getAllImage();
-        ArrayList<String> image_here = new ArrayList<>();
+        ArrayList<ReturnImage> image_here = new ArrayList<>();
         for(Image i :allImage){
-            image_here.add(MDTool.markdown2Html("![]("+i.getImageurl()+")"));
+            image_here.add(new ReturnImage(MDTool.markdown2Html("![]("+i.getImageurl()+")"),MDTool.markdown2Html("* "+i.getUploaddate()),i.getImageurl()));
         }
         modelMap.put("image_here",image_here);
+
         return "imagemanage";
     }
 

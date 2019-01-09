@@ -2,12 +2,17 @@
 
 
 <title>{{artile_title}}</title>
+<style>
+    img{
+        width:100%;
+    }
+</style>
 </head>
 <body>
 {{>layout/navbar}}
 
 {{#article}}
-<header class="masthead" style="background-image: url('img/post-bg.jpg')">
+<header class="masthead" style="background-image: url('/img/post-sample-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -21,11 +26,10 @@
     </div>
 </header>
 
-
 <article>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="col-lg-8 col-md-10 mx-auto" >
                 {{{context}}}
             </div>
         </div>
@@ -33,17 +37,18 @@
     <hr/>
 </article>
 
+
 {{#hascomment}}
 
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
             <h1>COMMENT : </h1>
-            <!--{{^username}}-->
-            <!--<a href="/login" class="btn btn-primary">logging to comment</a>-->
-            <!--{{/username}}-->
-            <!--{{#username}}-->
-            <!--<h3>{{.}} Welcome Comment </h3>-->
+            {{^username_index}}
+            <a href="/login" class="btn btn-primary">logging to comment</a>
+            {{/username_index}}
+            {{#username_index}}
+            <h3>{{.}} Welcome Comment </h3>
             <form method="post" action="/postcomment">
                 <input name="articleid" value="{{articleid}}" hidden/>
                 <div class="form-group col-xs-12 floating-label-form-group controls">
@@ -58,7 +63,7 @@
                     <button type="submit" class="btn btn-primary" id="sendMessageButton">post comment</button>
                 </div>
             </form>
-            <!--{{/username}}-->
+            {{/username_index}}
         </div>
     </div>
 </div>
@@ -77,7 +82,8 @@
                 </p>
                 <!--<p class="post-meta">{{postdate}}</p>-->
                 {{#adminpermission}}
-                <a class="btn btn-light" href="/#">delete this(no function)</a>
+
+                <a class="btn btn-light">delete this{{inlineid}}(no function)</a>
                 {{/adminpermission}}
             </div>
             <hr>

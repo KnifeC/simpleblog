@@ -78,6 +78,7 @@ public class ArticleController {
             modelMap.put("adminpermission", true);
         }
         modelMap.put("username", username);
+        modelMap.put("username_index", username);
         Article article = readService.readById(id);
         String markD = MDTool.markdown2Html(article.getContext());
         article.setContext(markD);

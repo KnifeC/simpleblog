@@ -50,38 +50,52 @@
     </div>
     <div class="row">
         <div class="clearfix col-lg-2 col-md-4 mx-auto">
-            <a class="btn btn-primary float-left" id="prepage" value="{{pageindex}}">&larr;Precious Page </a>
+            <a class="btn btn-primary float-left" id="prepage" onclick="goprepage()">&larr;Precious Page </a>
         </div>
         <div class="clearfix col-lg-2 col-md-4 mx-auto">
-            <a class="btn btn-primary float-right" id="nextpage" value="{{pageindex}}">Next Page &rarr;</a>
+            <a class="btn btn-primary float-right" id="nextpage" onclick="gonextpage()">Next Page &rarr;</a>
         </div>
-        <label id="pagenum" value="{{pagenum}}" hidden></label>
+        <input id="pagenum" value="{{pagenum}}" hidden/>
+        <input id="pageindex" value="{{pageindex}}" hidden/>
     </div>
 </div>
 
 
 <script>
-    var prepage = document.getElementById("prepage");
-    var nextpage = document.getElementById("nextpage");
-    var pagenum = document.getElementById("pagenum");
-    prepage.onclick = function () {
-        if (parseInt(prepage.value) === 0) {
+    function goprepage() {
+        var prepage = document.getElementById("prepage");
+        var nextpage = document.getElementById("nextpage");
+        var pagenum = document.getElementById("pagenum");
+        var pageindex = document.getElementById("pageindex");
+        pageindex = parseInt(pageindex.value);
+        // console.log(typeof (pageindex));
+        // console.log(pageindex);
+        if (pageindex == 1) {
             alert('this is the first page');
             return;
         } else {
-            page = parseInt(prepage.value) - 1;
-            window.location.href = "/list?page=" + page;
+            page = pageindex - 1;
+            console.log(page);
+            window.location.href = "/list?page="+page;
         }
-        print("hahaha");
     }
-    nextpage.onclick = function () {
-        if (parseInt(nextpage.value) === parseInt(pagenum.value)) {
+    function gonextpage() {
+        var prepage = document.getElementById("prepage");
+        var nextpage = document.getElementById("nextpage");
+        var pagenum = document.getElementById("pagenum");
+        var pageindex = document.getElementById("pageindex");
+        pageindex = parseInt(pageindex.value);
+        pagenum = parseInt(pagenum.value);
+        console.log(typeof (pageindex));
+        console.log(pageindex)
+        if (pageindex == pagenum) {
             alert('this is the last page');
+            return ;
         } else {
-            page = parseInt(nextpage.value) + 1;
-            window.location.href = "/list?page=" + page;
+            page = pageindex + 1;
+            console.log(page);
+            window.location.href = "/list?page="+page;
         }
-        print("lalala");
     }
 </script>
 {{>layout/script}}

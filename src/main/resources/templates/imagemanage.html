@@ -1,10 +1,15 @@
 {{>layout/head}}
 <title>Image</title>
+<style>
+    img {
+        width: 100%;
+    }
+</style>
 </head>
 <body>
 {{>layout/navbar}}
 
-<header class="masthead" style="background-image: url('img/contact-bg.jpg')">
+<header class="masthead" style="background-image: url('/img/post-bg.jpg')">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -38,20 +43,30 @@
                     <button type="submit" class="btn btn-primary" id="sendMessageButton">POST</button>
                 </div>
             </form>
+
         </div>
     </div>
-</div>
 
+</div>
+<hr/>
+
+{{#image_here}}
 <article>
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-md-10 mx-auto img-responsive center-block">
-                {{{image_here}}}
+            <div class="col-lg-8 col-md-10 mx-auto">
+                {{{date}}}
+                {{{image}}}
+                <div class="form-group col-xs-12  controls">
+                    <input type="text" class="form-control" value="{{imageurl}}" readonly/>
+                    <a class="btn btn-light" src="{{imageurl}}">获取图片</a>
+                </div>
             </div>
         </div>
     </div>
     <hr/>
 </article>
+{{/image_here}}
 
 
 {{>layout/script}}
