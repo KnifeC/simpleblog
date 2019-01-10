@@ -2,6 +2,38 @@
 <title>ADMIN</title>
 </head>
 <body>
+
+<table class="table">
+    <tr>
+        <td><a class="btn btn-dark" href="/index">ALPHABET Simple Blog</a></td>
+        <td>
+            <a class="btn btn-dark" href="/index">Home</a></td>
+
+        <td><a class="btn btn-dark" href="about.html">About</a></td>
+        {{#username}}
+        <td>
+            <a class="btn btn-dark" href="/logout">{{.}}点击退出</a>
+        </td>
+        {{/username}}
+        {{^username}}
+        <td>
+            <a class="btn btn-dark" href="/login">LogIn</a>
+        </td>
+        {{/username}}
+        {{#adminpermission}}
+        <td>
+            <a class="btn btn-dark" href="/write">Write</a>
+        </td>
+        <td>
+            <a class="btn btn-dark" href="/admin">Admin</a>
+        </td>
+        <td>
+            <a class="btn btn-dark" href="/image">Photo</a>
+        </td>
+        {{/adminpermission}}
+    </tr>
+</table>
+
 <table class="table">
     <tr>
         <th>userid</th>
@@ -25,8 +57,8 @@
                 <input class="form-control " id="usertype" type="text" name="type" value="{{type}}" readonly/>
                 <select class="form-control " type="selectbox" onChange="userChange()" id="typechange">
                     <option value="" disabled selected>{{type}}</option>
-                    <option value="user" >user</option>
-                    <option value="admin" >admin</option>
+                    <option value="user">user</option>
+                    <option value="admin">admin</option>
                 </select>
             </td>
             <td>
@@ -39,12 +71,12 @@
     <form method="post" action="/register">
         <tr>
             <td><a class="btn">本行增加一个用户</a></td>
-            <td><input class="form-control " type="text" name="username" /></td>
-            <td><input class="form-control " type="text" name="password" /></td>
+            <td><input class="form-control " type="text" name="username"/></td>
+            <td><input class="form-control " type="text" name="password"/></td>
             <td>
                 <select class="form-control " type="selectbox" name="type">
-                <option class="form-control " value="user">user</option>
-                <option  class="form-control " value="admin">admin</option>
+                    <option class="form-control " value="user">user</option>
+                    <option class="form-control " value="admin">admin</option>
                 </select>
             </td>
             <td>
@@ -56,12 +88,12 @@
 </table>
 
 <script>
-    function userChange(){
+    function userChange() {
         var typc = document.getElementById("typechange");
         var index = typc.selectedIndex;
-        var value= typc.options[index].value;
+        var value = typc.options[index].value;
         var usertype = document.getElementById("usertype");
-        usertype.setAttribute("value",value);
+        usertype.setAttribute("value", value);
     }
 </script>
 </body>

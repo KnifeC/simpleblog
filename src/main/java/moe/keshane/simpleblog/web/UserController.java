@@ -66,7 +66,12 @@ public class UserController {
     @Autowired
     AdminService adminService;
     @RequestMapping(value = "/admin",method = RequestMethod.GET)
-    public String admin(ModelMap modelMap){
+    public String admin(ModelMap modelMap,HttpSession session){
+        Object username = session.getAttribute(SessionKey.USER_NAME);
+        Object usertype = session.getAttribute(SessionKey.USER_TYPE);
+        if(usertype!=null&&usertype.toString().equals("admin")){
+            modelMap.put("adminpermission",true);
+        }
         ArrayList<User> allUserInfo = adminService.getAllUserInfo();
         if(allUserInfo==null){
             return "error";
