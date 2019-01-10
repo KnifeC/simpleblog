@@ -93,10 +93,18 @@ return admin.html
 
 ## 图床相关
 * 获取相册
-```$xslt
-/photo
+```
+/image
 method = GET
-return photomanage.html
+return imagemanage.html
+```
+
+* 上传图片
+```
+/image
+method = POST
+(type:MultipartFile)imagefile = ?
+return redirect:imagemanage
 ```
 
 ## 主页/列表
