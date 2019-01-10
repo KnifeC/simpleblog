@@ -23,7 +23,7 @@
             <td><input class="form-control " type="text" name="password" value="{{password}}"/></td>
             <td>
                 <input class="form-control " id="usertype" type="text" name="type" value="{{type}}" readonly/>
-                <select class="form-control " type="selectbox" onChange="userChange()" id="typechane">
+                <select class="form-control " type="selectbox" onChange="userChange()" id="typechange">
                     <option value="" disabled selected>{{type}}</option>
                     <option value="user" >user</option>
                     <option value="admin" >admin</option>
@@ -57,9 +57,8 @@
 
 <script>
     function userChange(){
-        var typc = document.getElementById("typechane");
+        var typc = document.getElementById("typechange");
         var index = typc.selectedIndex;
-        var text = typc.options[index].text;
         var value= typc.options[index].value;
         var usertype = document.getElementById("usertype");
         usertype.setAttribute("value",value);

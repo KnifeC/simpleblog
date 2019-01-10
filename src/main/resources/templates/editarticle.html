@@ -59,9 +59,13 @@
                 <div class="control-group">
                     <div class="form-group col-xs-12 controls">
                         <br/>
-                        <input type="checkbox" class="form-check-input" placeholder="Open Comment" name="hascomment"
-                               id="hascomment" checked="{{hascomment}}">
-                        <label>Open Comment?</label>
+                        <label class="btn">Open Comment?</label>
+                        <input class="form-control " id="usertype" type="text" name="type" value="{{hascomment}}" readonly/>
+                        <select class="form-control " type="selectbox" onChange="userChange()" id="typechange">
+                            <option value="" disabled selected>{{hascomment}}</option>
+                            <option value="false" >false</option>
+                            <option value="true" >true</option>
+                        </select>
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>

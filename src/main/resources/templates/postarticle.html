@@ -49,13 +49,16 @@
                 <div class="control-group">
                     <div class="form-group col-xs-12 controls">
                         <br/>
-                        <input type="checkbox" class="form-check-input" placeholder="Open Comment" name="hascomment"
-                               id="hascomment">
-                        <label>Open Comment?</label>
+                        <label class="btn">Open Comment?</label>
+                        <input class="form-control " id="usertype" type="text" name="type" value="false" readonly/>
+                        <select class="form-control " type="selectbox" onChange="userChange()" id="typechange">
+                            <option value="false" >false</option>
+                            <option value="true" >true</option>
+                        </select>
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>
-                <br>
+                <hr/>
                 <div id="success"></div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary" >POST</button>
@@ -77,6 +80,16 @@
     var simplemde = new SimpleMDE({
         element: document.getElementById("postarticle")});
 </script>
+<script>
+    function userChange(){
+        var typc = document.getElementById("typechange");
+        var index = typc.selectedIndex;
+        var value= typc.options[index].value;
+        var usertype = document.getElementById("usertype");
+        usertype.setAttribute("value",value);
+    }
+</script>
+
 
 </body>
 </html>
