@@ -60,12 +60,19 @@
                     <div class="form-group col-xs-12 controls">
                         <br/>
                         <label class="btn">Open Comment?</label>
-                        <input class="form-control " id="usertype" type="text" name="type" value="{{hascomment}}" readonly/>
-                        <select class="form-control " type="selectbox" onChange="userChange()" id="typechange">
-                            <option value="" disabled selected>{{hascomment}}</option>
-                            <option value="false" >false</option>
-                            <option value="true" >true</option>
-                        </select>
+                        <div class="control-group">
+                            <div class="col-xs-12 controls btn">
+                                <br/>
+                                {{^ishascomment}}
+                                <input class=" form-control btn btn-light " type="checkbox" name="type"/>
+                                {{/ishascomment}}
+                                {{#ishascomment}}
+                                <input class=" form-control btn btn-light " type="checkbox" name="type" checked/>
+                                {{/ishascomment}}
+                                <label class=>Open Comment?</label>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>

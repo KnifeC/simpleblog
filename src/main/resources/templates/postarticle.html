@@ -47,14 +47,10 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <div class="form-group col-xs-12 controls">
+                    <div class="col-xs-12 controls btn">
                         <br/>
-                        <label class="btn">Open Comment?</label>
-                        <input class="form-control " id="usertype" type="text" name="type" value="false" readonly/>
-                        <select class="form-control " type="selectbox" onChange="userChange()" id="typechange">
-                            <option value="false" >false</option>
-                            <option value="true" >true</option>
-                        </select>
+                        <input class=" form-control btn btn-light " id="usertype" type="checkbox" name="hascomment"/>
+                        <label class=>Open Comment?</label>
                         <p class="help-block text-danger"></p>
                     </div>
                 </div>
@@ -79,15 +75,6 @@
 <script>
     var simplemde = new SimpleMDE({
         element: document.getElementById("postarticle")});
-</script>
-<script>
-    function userChange(){
-        var typc = document.getElementById("typechange");
-        var index = typc.selectedIndex;
-        var value= typc.options[index].value;
-        var usertype = document.getElementById("usertype");
-        usertype.setAttribute("value",value);
-    }
 </script>
 
 

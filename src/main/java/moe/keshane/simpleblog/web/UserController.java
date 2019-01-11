@@ -13,7 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.net.URI;
 import java.util.ArrayList;
 
 @Controller
@@ -22,7 +25,7 @@ public class UserController {
     @Autowired
     private LoginService loginService;
     @RequestMapping(value = "/login",method = RequestMethod.POST)
-    public String login(UserForm userForm, ModelMap modelMap, HttpSession session)
+    public String login(UserForm userForm, ModelMap modelMap, HttpSession session, HttpServletRequest request)
     {
         User user = loginService.login(userForm.getUsername(),userForm.getPassword());
         if(user == null){
@@ -35,6 +38,8 @@ public class UserController {
         session.setAttribute(SessionKey.USER_TYPE,user.getType());
         modelMap.put("success_title","成功");
         modelMap.put("success_content","我一句话不说也不好");
+        String uri = request.getRequestURI();
+        System.out.println(uri);
         return "redirect:/index";
     }
 
@@ -46,7 +51,7 @@ public class UserController {
     @Autowired
     private RegService regService;
     @RequestMapping(value = "/register",method = RequestMethod.POST)
-    public String reg(UserForm userForm,ModelMap modelMap){
+    public String reg(UserForm userForm, ModelMap modelMap, HttpServletRequest request){
         User user = new User(userForm.getUsername(),userForm.getPassword());
         User reg = regService.reg(user);
         if(reg != null){
@@ -56,8 +61,27 @@ public class UserController {
             modelMap.put("success_title","失败了");
             modelMap.put("success_content","搞个大新闻");
         }
+        String uri = request.getRequestURI();
         return "redirect:/login";
     }
+
+
+    @RequestMapping(value = "/adminregister",method = RequestMethod.POST)
+    public String adminadduser(UserForm userForm, ModelMap modelMap, HttpServletRequest request){
+        User user = new User(userForm.getUsername(),userForm.getPassword());
+        User reg = regService.reg(user);
+        if(reg != null){
+            modelMap.put("success_title","成功了");
+            modelMap.put("success_content","看你这么热情");
+        }else{
+            modelMap.put("success_title","失败了");
+            modelMap.put("success_content","搞个大新闻");
+        }
+        String uri = request.getRequestURI();
+        return "redirect:/admin";
+    }
+
+
     @RequestMapping(value = "/register",method = RequestMethod.GET)
     public String registerWeb(){
         return "registerhtml";
@@ -79,6 +103,8 @@ public class UserController {
         modelMap.put("userinfo",allUserInfo);
         return "admin";
     }
+
+
 
     @Autowired
     UpdateUserService updateUserService;

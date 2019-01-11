@@ -54,8 +54,8 @@
             <td><input class="form-control " type="text" name="username" value="{{username}}"/></td>
             <td><input class="form-control " type="text" name="password" value="{{password}}"/></td>
             <td>
-                <input class="form-control " id="usertype" type="text" name="type" value="{{type}}" readonly/>
-                <select class="form-control " type="selectbox" onChange="userChange()" id="typechange">
+                <input class="form-control " id="usertype{{userid}}" type="text" name="type" value="{{type}}"/>
+                <select class="form-control " type="selectbox" onChange="userChange(this.id,'usertype{{userid}}')" id="typechange{{userid}}">
                     <option value="" disabled selected>{{type}}</option>
                     <option value="user">user</option>
                     <option value="admin">admin</option>
@@ -68,7 +68,7 @@
         </tr>
     </form>
     {{/userinfo}}
-    <form method="post" action="/register">
+    <form method="post" action="/adminregister">
         <tr>
             <td><a class="btn">本行增加一个用户</a></td>
             <td><input class="form-control " type="text" name="username"/></td>
@@ -88,11 +88,11 @@
 </table>
 
 <script>
-    function userChange() {
-        var typc = document.getElementById("typechange");
+    function userChange(typechange,usertype) {
+        var typc = document.getElementById(typechange);
         var index = typc.selectedIndex;
         var value = typc.options[index].value;
-        var usertype = document.getElementById("usertype");
+        var usertype = document.getElementById(usertype);
         usertype.setAttribute("value", value);
     }
 </script>

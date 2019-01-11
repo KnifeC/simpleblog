@@ -113,6 +113,9 @@ public class ArticleController {
         if (editArticle == null) {
             return "error";
         }
+        if(editArticle.isHascomment()){
+            modelMap.put("ishascomment",true);
+        }
         modelMap.put("edit_article", editArticle);
         return "editarticle";
     }
