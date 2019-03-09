@@ -91,7 +91,7 @@ public class ArticleController {
             for (Comment c : comments) {
                 int userid = c.getUserid();
                 User user = userService.findUserByUserid(userid);
-                ReturnComment returnComment = new ReturnComment(c.getArticleid(), c.getInlineid(), user.getUserid(), user.getUsername(), c.getCommentcontext());
+                ReturnComment returnComment = new ReturnComment(c.getInlineid(),c.getArticleid(),  user.getUserid(), user.getUsername(), c.getCommentcontext());
                 comment_list.add(returnComment);
             }
             modelMap.put("comment_list", comment_list);
