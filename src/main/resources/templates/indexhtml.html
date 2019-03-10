@@ -36,7 +36,8 @@
                 </a>
                 <p class="post-meta">{{postdate}}</p>
                 {{#adminpermission}}
-                <a class="btn btn-light">hascomment:{{hascomment}}</a>
+                <a class="btn-light">comment open?  {{hascomment}}</a>
+                <br/>
                 <a class="btn btn-light" href="/edit/{{articleid}}">edit this</a>
                 <a class="btn btn-light" href="/deletearticle/{{articleid}}">delete this</a>
                 {{/adminpermission}}
@@ -49,12 +50,16 @@
         </div>
     </div>
     <div class="row">
+        {{^atbegin}}
         <div class="clearfix col-lg-2 col-md-4 mx-auto">
-            <a class="btn btn-primary float-left" id="prepage" onclick="goprepage()">&larr;Precious Page </a>
+            <a class="btn btn-primary float-left" id="prepage" onclick="goprepage()">&larr;Precious</a>
         </div>
+        {{/atbegin}}
+        {{^atlast}}
         <div class="clearfix col-lg-2 col-md-4 mx-auto">
-            <a class="btn btn-primary float-right" id="nextpage" onclick="gonextpage()">Next Page &rarr;</a>
+            <a class="btn btn-primary float-right" id="nextpage" onclick="gonextpage()">Next&rarr;</a>
         </div>
+        {{/atlast}}
         <input id="pagenum" value="{{pagenum}}" hidden/>
         <input id="pageindex" value="{{pageindex}}" hidden/>
     </div>
@@ -98,6 +103,7 @@
         }
     }
 </script>
+{{>layout/footer}}
 {{>layout/script}}
 
 </body>

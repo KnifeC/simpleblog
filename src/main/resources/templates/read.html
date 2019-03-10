@@ -31,10 +31,17 @@
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto" >
                 {{{context}}}
+                <br/>
+                <br/>
+                {{#adminpermission}}
+                <a class="btn btn-light" href="/edit/{{articleid}}">edit this</a>
+                <a class="btn btn-light" href="/deletearticle/{{articleid}}">delete this</a>
+                {{/adminpermission}}
             </div>
         </div>
     </div>
     <hr/>
+
 </article>
 
 
@@ -43,12 +50,12 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            <h1>COMMENT : </h1>
+            <h3>COMMENT : </h3>
             {{^username_index}}
             <a href="/login" class="btn btn-primary">logging to comment</a>
             {{/username_index}}
             {{#username_index}}
-            <h3>{{.}} Welcome Comment </h3>
+            <h4>{{.}} Welcome Comment </h4>
             <form method="post" action="/postcomment">
                 <input name="articleid" value="{{articleid}}" hidden/>
                 <div class="form-group col-xs-12 floating-label-form-group controls">
@@ -59,6 +66,7 @@
                     <p class="help-block text-danger"></p>
                 </div>
                 <div id="success"></div>
+                <br/>
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary" id="sendMessageButton">post comment</button>
                 </div>
@@ -96,6 +104,7 @@
 </div>
 {{/hascomment}}
 {{/article}}
+{{>layout/footer}}
 {{>layout/script}}
 </body>
 

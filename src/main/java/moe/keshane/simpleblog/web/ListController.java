@@ -40,6 +40,12 @@ public class ListController {
             modelMap.put("articlePage", articlePage);
             modelMap.put("pageindex",page);
             modelMap.put("pagenum",articlePage.getTotalPages());
+            if(page == articlePage.getTotalPages()){
+                modelMap.put("atlast",true);
+            }
+            if(page == 1){
+                modelMap.put("atbegin",true);
+            }
         }else{
             modelMap.put("articlePage","没有数据");
         }
