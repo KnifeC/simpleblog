@@ -2,10 +2,7 @@ package moe.keshane.simpleblog.web;
 
 import moe.keshane.simpleblog.common.SessionKey;
 import moe.keshane.simpleblog.dal.entity.User;
-import moe.keshane.simpleblog.service.interfaces.AdminService;
-import moe.keshane.simpleblog.service.interfaces.LoginService;
-import moe.keshane.simpleblog.service.interfaces.RegService;
-import moe.keshane.simpleblog.service.interfaces.UpdateUserService;
+import moe.keshane.simpleblog.service.interfaces.*;
 import moe.keshane.simpleblog.web.forms.UpdateUserForm;
 import moe.keshane.simpleblog.web.forms.UserForm;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,9 +47,14 @@ public class UserController {
 
     @Autowired
     private RegService regService;
+    @Autowired
+    private UserService userService;
     @RequestMapping(value = "/register",method = RequestMethod.POST)
     public String reg(UserForm userForm, ModelMap modelMap, HttpServletRequest request){
         User user = new User(userForm.getUsername(),userForm.getPassword());
+        if (userService.getUserCount()==0){
+            user.setType("admin");
+        }
         User reg = regService.reg(user);
         if(reg != null){
             modelMap.put("success_title","成功了");
@@ -78,6 +80,7 @@ public class UserController {
             modelMap.put("success_content","搞个大新闻");
         }
         String uri = request.getRequestURI();
+
         return "redirect:/admin";
     }
 

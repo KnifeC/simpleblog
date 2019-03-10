@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -35,10 +36,11 @@ public class CommentColtroller {
         }
     }
 
-    @RequestMapping(value = "/deletecomment/{commentid}" ,method = RequestMethod.GET)
-    public String deleteComment(@PathVariable("commentid") Integer commentid){
+    @RequestMapping(value = "/deletecomment/" ,method = RequestMethod.POST)
+    public String deleteComment(int commentid,int articleid){
         boolean isdelete = deleteCommentService.deleteCommentById(commentid);
-        return "redirect:/article/";
+
+        return "redirect:/article/"+articleid;
     }
 
 }

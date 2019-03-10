@@ -4,4 +4,5 @@ import moe.keshane.simpleblog.dal.entity.User;
 
 public interface UserService {
     User findUserByUserid(int userid);
+    int getUserCount();
 }

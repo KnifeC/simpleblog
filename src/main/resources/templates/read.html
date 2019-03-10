@@ -82,7 +82,11 @@
                 </p>
                 <!--<p class="post-meta">{{postdate}}</p>-->
                 {{#adminpermission}}
-                <a class="btn btn-light" href="/deletecomment/{{inlineid}}">delete this</a>
+                <form action="/deletecomment/" method="post">
+                    <input type="text" hidden name="commentid" value="{{inlineid}}"/>
+                    <input type="text" hidden name="articleid" value="{{articleid}}"/>
+                    <input class="btn btn-light" type="submit" value="delete"/>
+                </form>
                 {{/adminpermission}}
             </div>
             <hr>
