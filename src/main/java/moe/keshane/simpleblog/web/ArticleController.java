@@ -154,7 +154,6 @@ public class ArticleController {
         } else {
             return "error";
         }
-
     }
 
 }
