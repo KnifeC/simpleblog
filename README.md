@@ -108,7 +108,7 @@ return redirect:imagemanage
 ```
 
 ## 主页/列表
-```$xslt
+```
 /list
 /
 index
