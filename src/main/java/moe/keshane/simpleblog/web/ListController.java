@@ -43,11 +43,17 @@ public class ListController {
             if(articlePage.getTotalPages() == 0){
                 modelMap.put("atbegin",true);
                 modelMap.put("atlast",true);
+                return "indexhtml";
             }
-            else if(page == articlePage.getTotalPages()){
+            if(articlePage.getTotalPages() == 1){
+                modelMap.put("atbegin",true);
+                modelMap.put("atlast",true);
+                return "indexhtml";
+            }
+            if(page == articlePage.getTotalPages()){
                 modelMap.put("atlast",true);
             }
-            else if(page == 1){
+            if(page == 1){
                 modelMap.put("atbegin",true);
             }
         }else{

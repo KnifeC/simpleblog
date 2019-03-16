@@ -41,7 +41,7 @@
         <th>password</th>
         <th>type</th>
         <th>update</th>
-        <th>delete</th>
+        <!--<th>delete</th>-->
     </tr>
     {{#userinfo}}
     <!--vate int userid;-->
@@ -64,7 +64,7 @@
             <td>
                 <button class="btn btn-dark" type="submit">更新修改</button>
             </td>
-            <td><a class="btn btn-light">删除</a></td>
+            <!--<td><a class="btn btn-light">删除</a></td>-->
         </tr>
     </form>
     {{/userinfo}}
@@ -74,7 +74,7 @@
             <td><input class="form-control " type="text" name="username"/></td>
             <td><input class="form-control " type="text" name="password"/></td>
             <td>
-                <select class="form-control " type="selectbox" name="type">
+                <select class="form-control " type="selectbox" name="type" hidden>
                     <option class="form-control " value="user">user</option>
                     <option class="form-control " value="admin">admin</option>
                 </select>

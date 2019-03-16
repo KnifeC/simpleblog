@@ -51,13 +51,13 @@
     </div>
     <div class="row">
         {{^atbegin}}
-        <div class="clearfix col-lg-2 col-md-4 mx-auto">
-            <a class="btn btn-primary float-left" id="prepage" onclick="goprepage()">&larr;Precious</a>
+        <div class="clearfix col-lg-2 col-md-4 mx-auto" >
+            <a class="btn btn-primary " id="prepage" onclick="goprepage()">Precious</a>
         </div>
         {{/atbegin}}
         {{^atlast}}
-        <div class="clearfix col-lg-2 col-md-4 mx-auto">
-            <a class="btn btn-primary float-right" id="nextpage" onclick="gonextpage()">Next&rarr;</a>
+        <div class="clearfix col-lg-2 col-md-4 mx-auto" >
+            <a class="btn btn-primary " id="nextpage" onclick="gonextpage()">NextPage</a>
         </div>
         {{/atlast}}
         <input id="pagenum" value="{{pagenum}}" hidden/>
